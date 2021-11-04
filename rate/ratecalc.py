@@ -22,6 +22,7 @@ def eurrate():
 
 main = Tk()
 
+main.title("Exchange Rates")
 usdtry,eurtry,usddate,eurdate,usrate,eurate = StringVar(),StringVar(),StringVar(),StringVar(),StringVar(),StringVar()
 
 #usd/try
@@ -57,6 +58,7 @@ def Update():
 Button(main,text="Update",command=Update).grid(row=3,column=2)
 def Info():
     info = Tk()
+    info.title("INFO")
     infotext = Label(info,text=
     """
 Powered by BloombergHT
