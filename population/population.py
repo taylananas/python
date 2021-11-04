@@ -1,19 +1,12 @@
 from numpy import *
 
-population = 2
-a = 1
-k = 1
-def formula(i, pop):
-    R_factor = random.uniform(1.25,1.883)
-    while pop < 100000:
-        temppop = pop
-        pop = pop * R_factor
-        pop = round(pop)
-        i += 1
-        if temppop == pop:
-            break
-    return i,pop,R_factor
+control = True
 
-for i in range(40):
-    print(k, ":", formula(a,population))
-    k += 1
+def populationsim(R, startpop):
+    while control == True:   
+        pop = 1
+        oldpop = pop
+        pop = round((startpop * R))
+        if oldpop == pop:
+            control = False
+        print(pop)
