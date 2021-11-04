@@ -55,17 +55,24 @@ def Update():
     usddate.set(usdrate()[2])
 
 Button(main,text="Update",command=Update).grid(row=3,column=2)
-
 def Info():
     info = Tk()
     infotext = Label(info,text=
     """
 Powered by BloombergHT
-    """
-    )
-    infotext.pack
+
+This is a basic exchange rate program using BloombergHT exchange rates.
+    """)
+    def Quit():
+        info.destroy()
+    Button(info,text="EXIT",command=Quit).grid(row=1,column=0)
+    infotext.grid(row=0,column=0)
     info.mainloop()
 
+def Quit():
+    main.destroy()
+
+Button(main,text="QUIT",command=Quit).grid(row=3,column=1)
 Button(main,text="INFO",command=Info).grid(row=3,column=3)
 
 main.mainloop()
