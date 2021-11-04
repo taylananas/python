@@ -1,15 +1,18 @@
 from numpy import *
 
 def populationsim(R, startpop):
+    i = 1
     control = True
     pop = startpop
     oldpop = pop
-    while control == True and pop < 1000000:   
+    while control == True and pop < 1000000000000000:   
         pop = round((pop * R))
         if oldpop == pop:
             control = False
-        print(pop)
-    return pop
-    
-randomr = random.uniform(1,2)
-print(f"{1}: {randomr}, {populationsim(randomr,5)}")
+        i += 1
+    return pop,i
+
+
+for a in range(100):
+    randomr = random.uniform(1,2)
+    print(f"{a}: {randomr}, {populationsim(randomr,25)}")
