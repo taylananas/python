@@ -1,0 +1,18 @@
+
+infantry = can
+cavalry = az atak
+artillery = çok atak
+
+inf/cav oranı 5ten küçükse debuff
+cav hasar * 0.4
+
+artillery, %80 inf %20 cav vurur
+art * random 0.xx float * 4/5 hasar inf 1/5 hasar cav
+
+
+cavalry, artillery vurur 
+cav * random 0.xx float = artiller hasarı
+
+
+infantry, infantry vurur
+infantry zar savaşı yapar
