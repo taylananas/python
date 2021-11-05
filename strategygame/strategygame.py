@@ -1,5 +1,6 @@
 from tkinter import *
-from numpy import random as r
+import random
+from numpy import random as npr
 
 main=Tk()
 main.geometry("600x400")
@@ -60,6 +61,18 @@ def single():
     cavbuybut.grid(row=5,column=3)
     artbuybut = Button(singleplayer,text="Buy 3x Artillery\nCost 300",command=artbuy)
     artbuybut.grid(row=6,column=3)
+
+    def getinf():
+        infamt = int(infamount.get())
+        return infamt
+    def getcav():
+        cavamt = int(cavamount.get())
+        return cavamt
+    def getart():
+        artamt = int(artamount.get())
+        return artamt
+
+    
 
     singleplayer.mainloop()
 
