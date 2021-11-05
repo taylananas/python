@@ -9,13 +9,32 @@ def single():
 
     singleplayer = Tk()
 
-
+    Label().grid(row=0)
+    #money
     moneyint = StringVar()
     moneyl = Label(singleplayer,text="Money")
-    moneyl.grid(row=0,column=0)
+    moneyl.grid(row=1,column=0)
     moneye = Entry(singleplayer,state="disabled",textvariable=moneyint,width=8)
-    moneye.grid(row=0,column=1)
-    
+    moneye.grid(row=1,column=1)
+    Label().grid(row=2)
+    #army
+    infamount = StringVar()
+    cavamount = StringVar()
+    artamount = StringVar()
+    armyl = Label(singleplayer,text="Army Overview")
+    armyl.grid(row=3,column=1)
+    infantry = Label(singleplayer,text="Infantry:")
+    infantry.grid(row=4,column=0)
+    infantrye = Entry(singleplayer,state="disabled",textvariable=infamount,width=8)
+    infantrye.grid(row=4,column=1)
+    cavalry = Label(singleplayer,text="Cavalry")
+    cavalry.grid(row=5,column=0)
+    cavalrye = Entry(singleplayer,state="disabled",textvariable=cavamount,width=8)
+    cavalrye.grid(row=5,column=1)
+    artillery = Label(singleplayer,text="Artillery")
+    artillery.grid(row=6,column=0)
+    artillere = Entry(singleplayer,state="disabled",textvariable=artamount,width=8)
+    artillere.grid(row=6,column=1)
 
     singleplayer.mainloop()
 
