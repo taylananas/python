@@ -6,7 +6,16 @@ main.geometry("600x400")
 
 def single():
     main.destroy()
+
     singleplayer = Tk()
+
+
+    moneyint = StringVar()
+    moneyl = Label(singleplayer,text="Money")
+    moneyl.grid(row=0,column=0)
+    moneye = Entry(singleplayer,state="disabled",textvariable=moneyint,width=8)
+    moneye.grid(row=0,column=1)
+    
 
     singleplayer.mainloop()
 
