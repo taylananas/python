@@ -3,23 +3,40 @@ from bs4 import BeautifulSoup
 from tkinter import *
 
 def usdrate():
-    urlusd = "https://www.bloomberght.com/doviz/dolar"
-    r_usd = requests.get(urlusd)
-    soup = BeautifulSoup(r_usd.content, "html.parser")
-    selection = soup.find("span", {"class": "downRed"})
-    selectionrate = soup.find("span", {"class": "bulk"})
-    selectiondate = soup.find("span", {"class": "date"})
-    return selection.text, selectionrate.text, selectiondate.text
+    try:
+        urlusd = "https://www.bloomberght.com/doviz/dolar"
+        r_usd = requests.get(urlusd)
+        soup = BeautifulSoup(r_usd.content, "html.parser")
+        selection = soup.find("span", {"class": "downRed"})
+        selectionrate = soup.find("span", {"class": "bulk"})
+        selectiondate = soup.find("span", {"class": "date"})
+        return selection.text, selectionrate.text, selectiondate.text
+    except AttributeError:
+        urlusd = "https://www.bloomberght.com/doviz/dolar"
+        r_usd = requests.get(urlusd)
+        soup = BeautifulSoup(r_usd.content, "html.parser")
+        selection = soup.find("span", {"class": "upGreen"})
+        selectionrate = soup.find("span", {"class": "bulk"})
+        selectiondate = soup.find("span", {"class": "date"})
+        return selection.text, selectionrate.text, selectiondate.text       
 
 def eurrate():
-    urlusd = "https://www.bloomberght.com/doviz/euro"
-    r_usd = requests.get(urlusd)
-    soup = BeautifulSoup(r_usd.content, "html.parser")
-    selection = soup.find("span", {"class": "downRed"})
-    selectionrate = soup.find("span", {"class": "bulk"})
-    selectiondate = soup.find("span", {"class": "date"})  
-    return selection.text, selectionrate.text, selectiondate.text
-
+    try:
+        urlusd = "https://www.bloomberght.com/doviz/euro"
+        r_usd = requests.get(urlusd)
+        soup = BeautifulSoup(r_usd.content, "html.parser")
+        selection = soup.find("span", {"class": "downRed"})
+        selectionrate = soup.find("span", {"class": "bulk"})
+        selectiondate = soup.find("span", {"class": "date"})  
+        return selection.text, selectionrate.text, selectiondate.text
+    except AttributeError:
+        urlusd = "https://www.bloomberght.com/doviz/euro"
+        r_usd = requests.get(urlusd)
+        soup = BeautifulSoup(r_usd.content, "html.parser")
+        selection = soup.find("span", {"class": "upGreen"})
+        selectionrate = soup.find("span", {"class": "bulk"})
+        selectiondate = soup.find("span", {"class": "date"})  
+        return selection.text, selectionrate.text, selectiondate.text
 main = Tk()
 
 main.title("Exchange Rates")
