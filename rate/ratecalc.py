@@ -46,7 +46,7 @@ usdtry,eurtry,usddate,eurdate,usrate,eurate = StringVar(),StringVar(),StringVar(
 usdtry.set(usdrate()[0])
 usrate.set(usdrate()[1])
 usddate.set(usdrate()[2])
-Label(main,text="Exchange").grid(row=0,column=0)
+Label(main,text="Currency<").grid(row=0,column=0)
 Label(main,text="Exchange Rate").grid(row=0,column=1)
 Label(main,text="Rate").grid(row=0,column=2)
 Label(main,text="Update Date").grid(row=0,column=3)
