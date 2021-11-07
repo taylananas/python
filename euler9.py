@@ -10,8 +10,6 @@ def main():
             if a**2 + b**2 == c**2 and a<b<c:
                 print(a,b,c)
                 print(a*b*c)
-            
-
 
 if __name__ == '__main__':
     main()
