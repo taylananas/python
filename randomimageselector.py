@@ -3,6 +3,7 @@ from tkinter import filedialog
 from PIL import Image,ImageTk
 import os
 import random as r
+import imghdr
 
 def main():
     mainwindow = Tk()
@@ -26,21 +27,19 @@ def main():
         filecount = len(listfiles)
         randomnum = r.randint(0,filecount-1)
         randomimage = listfiles[randomnum]
-        global image1
-        global imagelabel
-        imagelabel = Label()
-        try:
-            imagelabel.grid_forget()
-            image1 = ImageTk.PhotoImage(Image.open(path+"/"+randomimage).resize([800,600]))
-            imagelabel = Label(frame2,image=image1)
-            imagelabel.grid(row=0,column=0)        
-        except:
-            image1 = ImageTk.PhotoImage(Image.open(path+"/"+randomimage).resize([800,600]))
-            imagelabel = Label(frame2,image=image1)
-            imagelabel.grid(row=0,column=0)
-
-
-
+        if imghdr.what(f"{path}/{randomimage}") in ["png","jpg"]:
+            global image1
+            global imagelabel
+            imagelabel = Label()
+            try:
+                imagelabel.grid_forget()
+                image1 = ImageTk.PhotoImage(Image.open(path+"/"+randomimage).resize([800,600]))
+                imagelabel = Label(frame2,image=image1)
+                imagelabel.grid(row=0,column=0)        
+            except:
+                image1 = ImageTk.PhotoImage(Image.open(path+"/"+randomimage).resize([800,600]))
+                imagelabel = Label(frame2,image=image1)
+                imagelabel.grid(row=0,column=0)
 
     bt2 = Button(frame1,command=lambda:directorylisting(selected_folder),text="Random Image")
     bt2.grid(row=1,column=0)
