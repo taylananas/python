@@ -1,11 +1,13 @@
 from tkinter import *
 
 main = Tk()
+main.title("Stupid Calculator")
 
 def p_passbut():
     main.destroy()
 
     p_passtk = Tk()
+    p_passtk.title("P Lenght Calculator")
     weight = IntVar()
     height = IntVar()
     footsize = IntVar()
