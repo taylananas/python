@@ -24,8 +24,6 @@ def main():
             tamamlananliste.insert(END,hazirlananliste.get(indx))
             hazirlananliste.delete(indx)
 
-
-
         a = 1
         b = 1
         c = 1
@@ -79,13 +77,11 @@ def main():
         global menulist
         bt3 = Button(frame1,text="Menüyü Oluştur",command=yenimenu)
         bt3.grid(row=0,column=1)
-
     
     bt1 = Button(frame1,text="Menüyü Seçin",command=menulist)
     bt1.grid(row=0,column=0)
 
     mainwindow.mainloop()
-
 
 if __name__ == '__main__':
     main()
