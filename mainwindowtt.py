@@ -21,7 +21,6 @@ class Window(QMainWindow):
         variableframe = QFrame()
         variableframe.setFrameStyle(QFrame.Box | QFrame.Raised)
         variableframelayout = QGridLayout()
-        variableframelayout.addWidget(buttons.bigbutton)
         variableframe.setLayout(variableframelayout)
 
         historyframe = QFrame()
@@ -29,6 +28,11 @@ class Window(QMainWindow):
         historyframelayout = QGridLayout()
         historyframelayout.addWidget(textboxes.historytextbox)
         historyframe.setLayout(historyframelayout)
+
+        imageframe = QFrame()
+        imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+        imageframelayout = QGridLayout()
+        imageframe.setLayout(imageframelayout)
 
         frameLayout = QGridLayout()
         frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
@@ -43,8 +47,7 @@ app = QApplication(sys.argv)
 
 
 class functions():
-    def printer():
-        print("Hi")
+    pass
 
 class buttons():
     button1 = QPushButton("1")
@@ -53,14 +56,12 @@ class buttons():
     button4 = QPushButton("4")
     button5 = QPushButton("5")
     button6 = QPushButton("6")
-    button1.setFixedSize(60,60)
-    button2.setFixedSize(60,60)
-    button3.setFixedSize(60,60)
-    button4.setFixedSize(60,60)
-    button5.setFixedSize(60,60)
-    button6.setFixedSize(60,60)
-    bigbutton = QPushButton("bigbro")
-    bigbutton.setFixedSize(300,300)
+    button1.setFixedSize(100,100)
+    button2.setFixedSize(100,100)
+    button3.setFixedSize(100,100)
+    button4.setFixedSize(100,100)
+    button5.setFixedSize(100,100)
+    button6.setFixedSize(100,100)
 
 class sliders():
     pass
@@ -68,6 +69,9 @@ class sliders():
 class textboxes():
     historytextbox = QTextEdit()
     testtexting = QTextEdit()
+
+class imageshowers():
+    pass    
 
 window = Window()
 window.show()
