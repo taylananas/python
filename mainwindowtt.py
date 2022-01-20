@@ -15,17 +15,19 @@ class Window(QMainWindow):
         mainbuttonslayout.addWidget(buttons.button6,5,0)
 
         mainbuttonsframe = QFrame()
+        mainbuttonsframe.setFrameStyle(QFrame.Box | QFrame.Raised)
         mainbuttonsframe.setLayout(mainbuttonslayout)
 
         variableframe = QFrame()
+        variableframe.setFrameStyle(QFrame.Box | QFrame.Raised)
         variableframelayout = QGridLayout()
         variableframelayout.addWidget(buttons.bigbutton)
         variableframe.setLayout(variableframelayout)
 
         historyframe = QFrame()
+        historyframe.setFrameStyle(QFrame.Box | QFrame.Raised)
         historyframelayout = QGridLayout()
         historyframelayout.addWidget(textboxes.historytextbox)
-        historyframelayout.addWidget(textboxes.testtexting)
         historyframe.setLayout(historyframelayout)
 
         frameLayout = QGridLayout()
@@ -43,14 +45,6 @@ app = QApplication(sys.argv)
 class functions():
     def printer():
         print("Hi")
-    
-    def textboxeditor():
-        text = textboxes.testtexting.toPlainText()
-        print(text)
-    
-    def historyappender():
-        text = textboxes.testtexting.toPlainText()
-        textboxes.historytextbox.append(text)
 
 class buttons():
     button1 = QPushButton("1")
@@ -67,8 +61,6 @@ class buttons():
     button6.setFixedSize(60,60)
     bigbutton = QPushButton("bigbro")
     bigbutton.setFixedSize(300,300)
-    button1.clicked.connect(functions.textboxeditor)
-    button2.clicked.connect(functions.historyappender)
 
 class sliders():
     pass
