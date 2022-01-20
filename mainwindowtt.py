@@ -6,8 +6,24 @@ class Window(QMainWindow):
         super(Window,self).__init__()
         self.setWindowTitle("Main")
 
+        mainbuttonslayout = QGridLayout()
+        mainbuttonslayout.addWidget(buttons.button1,0,0)
+        mainbuttonslayout.addWidget(buttons.button2,1,0)
+        mainbuttonslayout.addWidget(buttons.button3,2,0)
+        mainbuttonslayout.addWidget(buttons.button4,3,0)
+        mainbuttonslayout.addWidget(buttons.button5,4,0)
+        mainbuttonslayout.addWidget(buttons.button6,5,0)
+
+        mainbuttonsframe = QFrame()
+        mainbuttonsframe.setLayout(mainbuttonslayout)
+    
+        testlayout = QGridLayout()
+        testlayout.addWidget(buttons.button7)
+        frame2 = QFrame()
+        frame2.setLayout(testlayout)
         frameLayout = QGridLayout()
-        frameLayout.addWidget(buttons.button1,0,0)
+        frameLayout.addWidget(mainbuttonsframe,0,0)
+        frameLayout.addWidget(frame2,0,1)
         
         mainframe = QWidget()
         mainframe.setLayout(frameLayout)
@@ -22,8 +38,18 @@ class fucktions():
         print("Hi")
 
 class buttons():
-    button1 = QPushButton("Sa")
-    button1.clicked.connect(fucktions.printer)
+    button1 = QPushButton("1")
+    button2 = QPushButton("2")
+    button3 = QPushButton("3")
+    button4 = QPushButton("4")
+    button5 = QPushButton("5")
+    button6 = QPushButton("6")
+    button1.setFixedSize(60,60)
+    button2.setFixedSize(60,60)
+    button3.setFixedSize(60,60)
+    button4.setFixedSize(60,60)
+    button5.setFixedSize(60,60)
+    button6.setFixedSize(60,60)
 
 class sliders():
     pass
