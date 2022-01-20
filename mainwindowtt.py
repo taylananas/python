@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QDialog
+from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit
 import sys
 
 class Window(QMainWindow):
@@ -16,10 +16,22 @@ class Window(QMainWindow):
 
         mainbuttonsframe = QFrame()
         mainbuttonsframe.setLayout(mainbuttonslayout)
-    
+
+        variableframe = QFrame()
+        variableframelayout = QGridLayout()
+        variableframelayout.addWidget(buttons.bigbutton)
+        variableframe.setLayout(variableframelayout)
+
+        historyframe = QFrame()
+        historyframelayout = QGridLayout()
+        historyframelayout.addWidget(textboxes.historytextbox)
+        historyframelayout.addWidget(textboxes.testtexting)
+        historyframe.setLayout(historyframelayout)
+
         frameLayout = QGridLayout()
-        frameLayout.addWidget(mainbuttonsframe,0,0)
-        
+        frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
+        frameLayout.addWidget(historyframe,1,1)
+        frameLayout.addWidget(variableframe,0,1)
         mainframe = QWidget()
         mainframe.setLayout(frameLayout)
 
@@ -28,9 +40,17 @@ class Window(QMainWindow):
 app = QApplication(sys.argv)
 
 
-class fucktions():
+class functions():
     def printer():
         print("Hi")
+    
+    def textboxeditor():
+        text = textboxes.testtexting.toPlainText()
+        print(text)
+    
+    def historyappender():
+        text = textboxes.testtexting.toPlainText()
+        textboxes.historytextbox.append(text)
 
 class buttons():
     button1 = QPushButton("1")
@@ -45,10 +65,17 @@ class buttons():
     button4.setFixedSize(60,60)
     button5.setFixedSize(60,60)
     button6.setFixedSize(60,60)
+    bigbutton = QPushButton("bigbro")
+    bigbutton.setFixedSize(300,300)
+    button1.clicked.connect(functions.textboxeditor)
+    button2.clicked.connect(functions.historyappender)
 
 class sliders():
     pass
 
+class textboxes():
+    historytextbox = QTextEdit()
+    testtexting = QTextEdit()
 
 window = Window()
 window.show()
