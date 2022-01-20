@@ -17,13 +17,8 @@ class Window(QMainWindow):
         mainbuttonsframe = QFrame()
         mainbuttonsframe.setLayout(mainbuttonslayout)
     
-        testlayout = QGridLayout()
-        testlayout.addWidget(buttons.button7)
-        frame2 = QFrame()
-        frame2.setLayout(testlayout)
         frameLayout = QGridLayout()
         frameLayout.addWidget(mainbuttonsframe,0,0)
-        frameLayout.addWidget(frame2,0,1)
         
         mainframe = QWidget()
         mainframe.setLayout(frameLayout)
