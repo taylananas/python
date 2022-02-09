@@ -1,8 +1,6 @@
-from tkinter import HORIZONTAL, VERTICAL
-from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
+from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QSizePolicy, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
 from PySide6.QtGui import QIcon, QAction, QPixmap
 from PySide6.QtCore import *
-import os
 import sys
 
 class MainWindow(QMainWindow):
@@ -50,6 +48,7 @@ class MainWindow(QMainWindow):
         imageframe = QFrame()
         imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
         imageframelayout = QGridLayout()
+        imageframe.setMinimumWidth(400)
         imageframe.setLayout(imageframelayout)
         imageframelayout.addWidget(widgets.exampic)
 
@@ -68,12 +67,12 @@ app = QApplication(sys.argv)
 
 class functions():
     def imageselection():
-        filepath = QFileDialog.getOpenFileName(None, 'Open file', 'c:\\',"Image files (*.jpg *.png)")
+        filepath = QFileDialog.getOpenFileName(None, 'Select file', 'c:\\',"Image files (*.jpg *.png)")
         widgets.exampic.setPixmap(QPixmap(filepath[0])) 
         widgets.exampic.show()   
 
-class widgets():
-    button1 = QPushButton("1")
+class widgets():    
+    button1 = QPushButton("1") #button to select file
     button2 = QPushButton("2")
     button3 = QPushButton("3")
     button4 = QPushButton("4")
@@ -87,6 +86,7 @@ class widgets():
     button6.setFixedSize(100,100)
     button1.clicked.connect(functions.imageselection)
     historytextbox = QTextEdit()
+    historytextbox.setReadOnly(True)
     testtexting = QTextEdit()
     exampic = QLabel()
     splitter1 = QSplitter(Qt.Horizontal)
