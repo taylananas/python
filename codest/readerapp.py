@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel
-from PySide6.QtGui import QIcon, QAction
+from PySide6.QtGui import QIcon, QAction, QPixmap
 import os
 import sys
 
@@ -40,11 +40,13 @@ class MainWindow(QMainWindow):
         imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
         imageframelayout = QGridLayout()
         imageframe.setLayout(imageframelayout)
+        imageframelayout.addWidget(widgets.exampic)
 
         frameLayout = QGridLayout()
         frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
         frameLayout.addWidget(historyframe,1,1)
         frameLayout.addWidget(variableframe,0,1)
+        frameLayout.addWidget(imageframe,0,2,2,1)
         mainframe = QWidget()
         mainframe.setLayout(frameLayout)
 
@@ -53,7 +55,10 @@ class MainWindow(QMainWindow):
 app = QApplication(sys.argv)
 
 class functions():
-    pass
+    def imageselection():
+        filepath = QFileDialog.getOpenFileName(None, 'Open file', 'c:\\',"Image files (*.jpg *.png)")
+        widgets.exampic.setPixmap(QPixmap(filepath[0])) 
+        widgets.exampic.show()   
 
 class widgets():
     button1 = QPushButton("1")
@@ -68,9 +73,11 @@ class widgets():
     button4.setFixedSize(100,100)
     button5.setFixedSize(100,100)
     button6.setFixedSize(100,100)
+    button1.clicked.connect(functions.imageselection)
     historytextbox = QTextEdit()
     testtexting = QTextEdit()
-    
+    exampic = QLabel()
+
 
 mainwind = MainWindow()
 mainwind.show()
