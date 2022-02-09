@@ -1,5 +1,7 @@
-from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel
+from tkinter import HORIZONTAL, VERTICAL
+from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
 from PySide6.QtGui import QIcon, QAction, QPixmap
+from PySide6.QtCore import *
 import os
 import sys
 
@@ -36,17 +38,27 @@ class MainWindow(QMainWindow):
         historyframelayout.addWidget(widgets.historytextbox)
         historyframe.setLayout(historyframelayout)
 
+        widgets.splitter2.addWidget(variableframe)
+        widgets.splitter2.addWidget(historyframe)
+
+        histvariframe = QFrame()
+        histvariframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+        histvarilayout = QGridLayout()
+        histvarilayout.addWidget(widgets.splitter2)
+        histvariframe.setLayout(histvarilayout)
+
         imageframe = QFrame()
         imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
         imageframelayout = QGridLayout()
         imageframe.setLayout(imageframelayout)
         imageframelayout.addWidget(widgets.exampic)
 
+        widgets.splitter1.addWidget(histvariframe)
+        widgets.splitter1.addWidget(imageframe)
+
         frameLayout = QGridLayout()
         frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
-        frameLayout.addWidget(historyframe,1,1)
-        frameLayout.addWidget(variableframe,0,1)
-        frameLayout.addWidget(imageframe,0,2,2,1)
+        frameLayout.addWidget(widgets.splitter1,0,2,2,1)
         mainframe = QWidget()
         mainframe.setLayout(frameLayout)
 
@@ -77,6 +89,8 @@ class widgets():
     historytextbox = QTextEdit()
     testtexting = QTextEdit()
     exampic = QLabel()
+    splitter1 = QSplitter(Qt.Horizontal)
+    splitter2 = QSplitter(Qt.Vertical)
 
 
 mainwind = MainWindow()
