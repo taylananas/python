@@ -1,5 +1,6 @@
-from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit
+from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog
 from PySide6.QtGui import QIcon, QAction
+import os
 import sys
 
 class Window(QMainWindow):
@@ -19,6 +20,8 @@ class Window(QMainWindow):
 
         saveAction = QAction("Save",self)
         fileMenu.addAction(saveAction)
+        saveAction.setShortcut("Ctrl+S")
+        saveAction.triggered.connect(functions.save)
 
     def setlayout(self):
         frameLayout = QGridLayout()
@@ -31,7 +34,8 @@ class Window(QMainWindow):
 app = QApplication(sys.argv)
 
 class functions():
-    pass
+    def save():
+        filepath = QFileDialog.getExistingDirectory()
 
 class widgets():
     maintextbox = QTextEdit()
