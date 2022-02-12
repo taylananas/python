@@ -9,8 +9,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Reader")
         self.setGeometry(360,140,1200,800)
         self.setlayout()
-    def setmenu(self):
-        pass
+        def setmenu(self):
+            pass
 
     def setlayout(self):
         mainbuttonslayout = QGridLayout()
@@ -67,7 +67,7 @@ app = QApplication(sys.argv)
 
 class functions():
     def imageselection():
-        filepath = QFileDialog.getOpenFileName(None, 'Select file', 'c:\\',"Image files (*.jpg *.png)")
+        filepath = QFileDialog.getOpenFileName(None, 'Select file', 'c:\\',"Image files (*.jpg *.png *.jfif)")
         widgets.exampic.setPixmap(QPixmap(filepath[0])) 
         widgets.exampic.show()   
 
@@ -91,7 +91,6 @@ class widgets():
     exampic = QLabel()
     splitter1 = QSplitter(Qt.Horizontal)
     splitter2 = QSplitter(Qt.Vertical)
-
 
 mainwind = MainWindow()
 mainwind.show()
