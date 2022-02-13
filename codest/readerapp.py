@@ -18,6 +18,20 @@ class functions():
         pixmap = QPixmap(filepath[0])
         widgets.exampic.setPixmap(pixmap) 
         widgets.exampic.show()   
+    
+    def clearvariablelayout():
+        for i in reversed(range(layout.variableframelayout.count())):
+            removedwidget = layout.variableframelayout.itemAt(i).widget()
+            removedwidget.setParent(None)
+            layout.variableframelayout.removeWidget(removedwidget)
+
+    def test1():
+        functions.clearvariablelayout()
+        layout.variableframelayout.addWidget(widgets.testbut1)
+
+    def test2():
+        functions.clearvariablelayout()
+        layout.variableframelayout.addWidget(widgets.testbut2)
 
 class widgets():    
     button1 = QPushButton("1") #button to select file
@@ -26,6 +40,8 @@ class widgets():
     button4 = QPushButton("4")
     button5 = QPushButton("5")
     button6 = QPushButton("6")
+    testbut1 = QPushButton("test 1")
+    testbut2 = QPushButton("test 2")
     button1.setFixedSize(100,100)
     button2.setFixedSize(100,100)
     button3.setFixedSize(100,100)
@@ -33,6 +49,8 @@ class widgets():
     button5.setFixedSize(100,100)
     button6.setFixedSize(100,100)
     button1.clicked.connect(functions.imageselection)
+    button2.clicked.connect(functions.test1)
+    button3.clicked.connect(functions.test2)
     historytextbox = QTextEdit()
     historytextbox.setReadOnly(True)
     testtexting = QTextEdit()
