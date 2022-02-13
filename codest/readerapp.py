@@ -28,6 +28,7 @@ class functions():
     def test1():
         functions.clearvariablelayout()
         layout.variableframelayout.addWidget(widgets.testbut1)
+        layout.variableframelayout.addWidget(widgets.testbut3)
 
     def test2():
         functions.clearvariablelayout()
@@ -42,6 +43,7 @@ class widgets():
     button6 = QPushButton("6")
     testbut1 = QPushButton("test 1")
     testbut2 = QPushButton("test 2")
+    testbut3 = QPushButton("test 3")
     button1.setFixedSize(100,100)
     button2.setFixedSize(100,100)
     button3.setFixedSize(100,100)
@@ -69,36 +71,45 @@ class layout():
     mainbuttonslayout.addWidget(widgets.button4,3,0)
     mainbuttonslayout.addWidget(widgets.button5,4,0)
     mainbuttonslayout.addWidget(widgets.button6,5,0)
+
     mainbuttonsframe = QFrame()
     mainbuttonsframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     mainbuttonsframe.setLayout(mainbuttonslayout)
+
     variableframe = QFrame()
     variableframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     variableframelayout = QGridLayout()
     variableframe.setLayout(variableframelayout)
+
     historyframe = QFrame()
     historyframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     historyframelayout = QGridLayout()
     historyframelayout.addWidget(widgets.historytextbox)
     historyframe.setLayout(historyframelayout)
+
     widgets.splitter2.addWidget(variableframe)
     widgets.splitter2.addWidget(historyframe)
+
     histvariframe = QFrame()
     histvariframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     histvarilayout = QGridLayout()
     histvarilayout.addWidget(widgets.splitter2)
     histvariframe.setLayout(histvarilayout)
+
     imageframe = QFrame()
     imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     imageframelayout = QGridLayout()
     imageframe.setMinimumWidth(400)
     imageframe.setLayout(imageframelayout)
     imageframelayout.addWidget(widgets.exampic)
+
     widgets.splitter1.addWidget(histvariframe)
     widgets.splitter1.addWidget(imageframe)
+
     frameLayout = QGridLayout()
     frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
     frameLayout.addWidget(widgets.splitter1,0,2,2,1)
+
     mainframe = QWidget()
     mainframe.setLayout(frameLayout)
 
