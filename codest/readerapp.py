@@ -15,7 +15,8 @@ class MainWindow(QMainWindow):
 class functions():
     def imageselection():
         filepath = QFileDialog.getOpenFileName(None, 'Select file', 'c:\\',"Image files (*.jpg *.png *.jfif)")
-        widgets.exampic.setPixmap(QPixmap(filepath[0])) 
+        pixmap = QPixmap(filepath[0])
+        widgets.exampic.setPixmap(pixmap) 
         widgets.exampic.show()   
 
 class widgets():    
@@ -36,8 +37,9 @@ class widgets():
     historytextbox.setReadOnly(True)
     testtexting = QTextEdit()
     exampic = QLabel()
-    exampic.setMinimumSize(600,600)
-    exampic.setMaximumSize(900,900)
+    exampic.setScaledContents(True)
+    exampic.installEventFilter(None)
+    exampic.setMaximumSize(700,700)
     splitter1 = QSplitter(Qt.Horizontal)
     splitter2 = QSplitter(Qt.Vertical)
 
