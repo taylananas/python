@@ -3,67 +3,14 @@ from PySide6.QtGui import QIcon, QAction, QPixmap
 from PySide6.QtCore import *
 import sys
 
+app = QApplication(sys.argv)
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow,self).__init__()
         self.setWindowTitle("Reader")
         self.setGeometry(360,140,1200,800)
-        self.setlayout()
-        def setmenu(self):
-            pass
-
-    def setlayout(self):
-        mainbuttonslayout = QGridLayout()
-        mainbuttonslayout.addWidget(widgets.button1,0,0)
-        mainbuttonslayout.addWidget(widgets.button2,1,0)
-        mainbuttonslayout.addWidget(widgets.button3,2,0)
-        mainbuttonslayout.addWidget(widgets.button4,3,0)
-        mainbuttonslayout.addWidget(widgets.button5,4,0)
-        mainbuttonslayout.addWidget(widgets.button6,5,0)
-
-        mainbuttonsframe = QFrame()
-        mainbuttonsframe.setFrameStyle(QFrame.Box | QFrame.Raised)
-        mainbuttonsframe.setLayout(mainbuttonslayout)
-
-        variableframe = QFrame()
-        variableframe.setFrameStyle(QFrame.Box | QFrame.Raised)
-        variableframelayout = QGridLayout()
-        variableframe.setLayout(variableframelayout)
-
-        historyframe = QFrame()
-        historyframe.setFrameStyle(QFrame.Box | QFrame.Raised)
-        historyframelayout = QGridLayout()
-        historyframelayout.addWidget(widgets.historytextbox)
-        historyframe.setLayout(historyframelayout)
-
-        widgets.splitter2.addWidget(variableframe)
-        widgets.splitter2.addWidget(historyframe)
-
-        histvariframe = QFrame()
-        histvariframe.setFrameStyle(QFrame.Box | QFrame.Raised)
-        histvarilayout = QGridLayout()
-        histvarilayout.addWidget(widgets.splitter2)
-        histvariframe.setLayout(histvarilayout)
-
-        imageframe = QFrame()
-        imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
-        imageframelayout = QGridLayout()
-        imageframe.setMinimumWidth(400)
-        imageframe.setLayout(imageframelayout)
-        imageframelayout.addWidget(widgets.exampic)
-
-        widgets.splitter1.addWidget(histvariframe)
-        widgets.splitter1.addWidget(imageframe)
-
-        frameLayout = QGridLayout()
-        frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
-        frameLayout.addWidget(widgets.splitter1,0,2,2,1)
-        mainframe = QWidget()
-        mainframe.setLayout(frameLayout)
-
-        self.setCentralWidget(mainframe)
-
-app = QApplication(sys.argv)
+        self.setCentralWidget(layout.mainframe)
 
 class functions():
     def imageselection():
@@ -89,8 +36,51 @@ class widgets():
     historytextbox.setReadOnly(True)
     testtexting = QTextEdit()
     exampic = QLabel()
+    exampic.setMinimumSize(600,600)
+    exampic.setMaximumSize(900,900)
     splitter1 = QSplitter(Qt.Horizontal)
     splitter2 = QSplitter(Qt.Vertical)
+
+class layout():
+    mainbuttonslayout = QGridLayout()
+    mainbuttonslayout.addWidget(widgets.button1,0,0)
+    mainbuttonslayout.addWidget(widgets.button2,1,0)
+    mainbuttonslayout.addWidget(widgets.button3,2,0)
+    mainbuttonslayout.addWidget(widgets.button4,3,0)
+    mainbuttonslayout.addWidget(widgets.button5,4,0)
+    mainbuttonslayout.addWidget(widgets.button6,5,0)
+    mainbuttonsframe = QFrame()
+    mainbuttonsframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+    mainbuttonsframe.setLayout(mainbuttonslayout)
+    variableframe = QFrame()
+    variableframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+    variableframelayout = QGridLayout()
+    variableframe.setLayout(variableframelayout)
+    historyframe = QFrame()
+    historyframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+    historyframelayout = QGridLayout()
+    historyframelayout.addWidget(widgets.historytextbox)
+    historyframe.setLayout(historyframelayout)
+    widgets.splitter2.addWidget(variableframe)
+    widgets.splitter2.addWidget(historyframe)
+    histvariframe = QFrame()
+    histvariframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+    histvarilayout = QGridLayout()
+    histvarilayout.addWidget(widgets.splitter2)
+    histvariframe.setLayout(histvarilayout)
+    imageframe = QFrame()
+    imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+    imageframelayout = QGridLayout()
+    imageframe.setMinimumWidth(400)
+    imageframe.setLayout(imageframelayout)
+    imageframelayout.addWidget(widgets.exampic)
+    widgets.splitter1.addWidget(histvariframe)
+    widgets.splitter1.addWidget(imageframe)
+    frameLayout = QGridLayout()
+    frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
+    frameLayout.addWidget(widgets.splitter1,0,2,2,1)
+    mainframe = QWidget()
+    mainframe.setLayout(frameLayout)
 
 mainwind = MainWindow()
 mainwind.show()
