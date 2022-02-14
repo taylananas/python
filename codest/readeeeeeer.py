@@ -4,15 +4,15 @@ from tkinter import messagebox
 import numpy as np
 from PIL import Image, ImageTk
 import tkinter.font as font
-# import cv2
+import cv2
 from tkinter import filedialog as fd
 import os
 from math import sqrt
 import matplotlib.pyplot as plt
-# import pandas as pd
-# from scipy import optimize
-# import xlwt
-# import xlsxwriter
+import pandas as pd
+from scipy import optimize
+import xlwt
+import xlsxwriter
 # from docx import Document
 # from docx.shared import Inches
 # import docx
@@ -98,15 +98,15 @@ tv_for_data.place(x=multiplier_for_x(310), y=multiplier_for_y(310), height=multi
 
 # Creating Image Area
 # -------------------------------------------------
-photo_for_graph = Image.open(r'johnxina.jpg')
-photo_for_graph = photo_for_graph.resize((multiplier_for_x(320), multiplier_for_y(240)))
-photo_for_graph = ImageTk.PhotoImage(photo_for_graph)
-file_path_graph = tk.Label(main_root, bg='PeachPuff3', image=photo_for_graph).place(height=multiplier_for_y(240), width=multiplier_for_x(320), x=multiplier_for_x(670), y=multiplier_for_y(65))
-# *************************************************************
-photo_for_img = Image.open(r'johnxina.jpg')
-photo_for_img = photo_for_img.resize((multiplier_for_x(320), multiplier_for_y(240)))
-photo_for_img = ImageTk.PhotoImage(photo_for_img)
-file_path_img = tk.Label(main_root, bg='PeachPuff3', image=photo_for_img).place(height=multiplier_for_y(240), width=multiplier_for_x(320), x=multiplier_for_x(310), y=multiplier_for_y(65))
+# photo_for_graph = Image.open(r'johnxina.jpg')
+# photo_for_graph = photo_for_graph.resize((multiplier_for_x(320), multiplier_for_y(240)))
+# photo_for_graph = ImageTk.PhotoImage(photo_for_graph)
+# file_path_graph = tk.Label(main_root, bg='PeachPuff3', image=photo_for_graph).place(height=multiplier_for_y(240), width=multiplier_for_x(320), x=multiplier_for_x(670), y=multiplier_for_y(65))
+# # *************************************************************
+# photo_for_img = Image.open(r'johnxina.jpg')
+# photo_for_img = photo_for_img.resize((multiplier_for_x(320), multiplier_for_y(240)))
+# photo_for_img = ImageTk.PhotoImage(photo_for_img)
+# file_path_img = tk.Label(main_root, bg='PeachPuff3', image=photo_for_img).place(height=multiplier_for_y(240), width=multiplier_for_x(320), x=multiplier_for_x(310), y=multiplier_for_y(65))
 
 # -------------------------------------------------
 
