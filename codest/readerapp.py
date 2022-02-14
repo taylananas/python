@@ -1,8 +1,10 @@
 from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QSizePolicy, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
-from PySide6.QtGui import QIcon, QAction, QPixmap
+from PySide6.QtGui import QIcon, QAction, QPixmap, QFont
 from PySide6.QtCore import *
 import sys
+from datetime import datetime
 
+from matplotlib.pyplot import hist
 app = QApplication(sys.argv)
 
 class MainWindow(QMainWindow):
@@ -24,6 +26,9 @@ class functions():
             removedwidget = layout.variableframelayout.itemAt(i).widget()
             removedwidget.setParent(None)
             layout.variableframelayout.removeWidget(removedwidget)
+        
+        now = datetime.now().strftime("%H:%M:%S") 
+        widgets.historytextbox.append(f"{now}   :   Clearing variables...")
 
     def test1():
         functions.clearvariablelayout()
@@ -41,9 +46,11 @@ class widgets():
     button4 = QPushButton("4")
     button5 = QPushButton("5")
     button6 = QPushButton("6")
+
     testbut1 = QPushButton("test 1")
     testbut2 = QPushButton("test 2")
     testbut3 = QPushButton("test 3")
+
     button1.setFixedSize(100,100)
     button2.setFixedSize(100,100)
     button3.setFixedSize(100,100)
@@ -53,13 +60,21 @@ class widgets():
     button1.clicked.connect(functions.imageselection)
     button2.clicked.connect(functions.test1)
     button3.clicked.connect(functions.test2)
+
     historytextbox = QTextEdit()
     historytextbox.setReadOnly(True)
+
+    textfont = QFont()
+    textfont.setPointSize(16)
+    historytextbox.setFont(textfont)
+
     testtexting = QTextEdit()
+
     exampic = QLabel()
     exampic.setScaledContents(True)
     exampic.installEventFilter(None)
     exampic.setMaximumSize(700,700)
+
     splitter1 = QSplitter(Qt.Horizontal)
     splitter2 = QSplitter(Qt.Vertical)
 
