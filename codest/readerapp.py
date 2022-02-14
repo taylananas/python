@@ -26,10 +26,7 @@ class functions():
             removedwidget = layout.variableframelayout.itemAt(i).widget()
             removedwidget.setParent(None)
             layout.variableframelayout.removeWidget(removedwidget)
-        
-        now = datetime.now().strftime("%H:%M:%S") 
-        widgets.historytextbox.append(f"{now}   :   Clearing variables...")
-
+            
     def test1():
         functions.clearvariablelayout()
         layout.variableframelayout.addWidget(widgets.testbut1)
@@ -38,6 +35,10 @@ class functions():
     def test2():
         functions.clearvariablelayout()
         layout.variableframelayout.addWidget(widgets.testbut2)
+
+    def timecurrent():
+        now = datetime.now().strftime("%H:%M:%S") 
+        return now
 
 class widgets():    
     button1 = QPushButton("1") #button to select file
