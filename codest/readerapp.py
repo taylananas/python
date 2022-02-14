@@ -1,6 +1,6 @@
 from msilib.schema import Font
 from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QTabWidget, QSizePolicy, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
-from PySide6.QtGui import QIcon, QAction, QPixmap, QFont
+from PySide6.QtGui import QIcon, QAction, QPixmap, QFont, QMouseEvent
 from PySide6.QtCore import *
 import sys
 from datetime import datetime
@@ -23,14 +23,14 @@ class MainWindow(QMainWindow):
         newFile.setShortcut("Ctrl+N")
 
 class functions():
-    def imageselection():
+    def imageselection():#selecting that image
         filepath = QFileDialog.getOpenFileName(None, 'Select file', 'c:\\',"Image files (*.jpg *.png *.jfif)")
         pixmap = QPixmap(filepath[0])
         widgets.exampic.setPixmap(pixmap)
         widgets.exampic.show()
         widgets.historytextbox.append(f"{functions.timecurrent()} New image selected at {filepath[0]}")
 
-    def clearvariablelayout():
+    def clearvariablelayout(): #clearing a layout
         for i in reversed(range(layout.variableframelayout.count())):
             removedwidget = layout.variableframelayout.itemAt(i).widget()
             removedwidget.setParent(None)
@@ -46,7 +46,7 @@ class functions():
         functions.clearvariablelayout()
         layout.variableframelayout.addWidget(widgets.testbut2)
 
-    def timecurrent():
+    def timecurrent(): #returns current time
         now = datetime.now().strftime("%H:%M:%S")
         return now
 
@@ -92,6 +92,10 @@ class widgets():
     splitter1 = QSplitter(Qt.Horizontal)
     splitter2 = QSplitter(Qt.Vertical)
     splitter2.setMaximumSize(700,700)
+
+class myEvents():
+    #clicking on image to create a new window with that image
+    widgets.exampic.mousePressEvent = lambda a: print(functions.timecurrent())#FUNCTION HERE
 
 class layout():
     mainbuttonslayout = QGridLayout()
