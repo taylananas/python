@@ -1,10 +1,9 @@
-from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QSizePolicy, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
+from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QTabWidget, QSizePolicy, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
 from PySide6.QtGui import QIcon, QAction, QPixmap, QFont
 from PySide6.QtCore import *
 import sys
 from datetime import datetime
 
-from matplotlib.pyplot import hist
 app = QApplication(sys.argv)
 
 class MainWindow(QMainWindow):
@@ -20,12 +19,14 @@ class functions():
         pixmap = QPixmap(filepath[0])
         widgets.exampic.setPixmap(pixmap) 
         widgets.exampic.show()   
+        widgets.historytextbox.append(f"{functions.timecurrent()} New image selected at {filepath[0]}")
     
     def clearvariablelayout():
         for i in reversed(range(layout.variableframelayout.count())):
             removedwidget = layout.variableframelayout.itemAt(i).widget()
             removedwidget.setParent(None)
             layout.variableframelayout.removeWidget(removedwidget)
+        widgets.historytextbox.append(f"{functions.timecurrent()} New Layout")
             
     def test1():
         functions.clearvariablelayout()
@@ -41,7 +42,7 @@ class functions():
         return now
 
 class widgets():    
-    button1 = QPushButton("1") #button to select file
+    button1 = QPushButton("1")
     button2 = QPushButton("2")
     button3 = QPushButton("3")
     button4 = QPushButton("4")
@@ -58,6 +59,7 @@ class widgets():
     button4.setFixedSize(100,100)
     button5.setFixedSize(100,100)
     button6.setFixedSize(100,100)
+
     button1.clicked.connect(functions.imageselection)
     button2.clicked.connect(functions.test1)
     button3.clicked.connect(functions.test2)
@@ -66,7 +68,7 @@ class widgets():
     historytextbox.setReadOnly(True)
 
     textfont = QFont()
-    textfont.setPointSize(16)
+    textfont.setPointSize(12)
     historytextbox.setFont(textfont)
 
     testtexting = QTextEdit()
@@ -113,11 +115,16 @@ class layout():
     histvariframe.setLayout(histvarilayout)
 
     imageframe = QFrame()
+    
+    tab1 = QTabWidget()
+    tab1.addTab(widgets.exampic, "Image")
+
     imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     imageframelayout = QGridLayout()
     imageframe.setMinimumWidth(400)
+    imageframelayout.addWidget(tab1)
     imageframe.setLayout(imageframelayout)
-    imageframelayout.addWidget(widgets.exampic)
+
 
     widgets.splitter1.addWidget(histvariframe)
     widgets.splitter1.addWidget(imageframe)
