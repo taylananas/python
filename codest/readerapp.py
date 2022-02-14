@@ -17,7 +17,6 @@ class MainWindow(QMainWindow):
 
     def barmenu(self):
         mainMenu = self.menuBar()
-
         fileMenu = mainMenu.addMenu("File")
         newFile = fileMenu.addAction("Import File")
         newFile.triggered.connect(functions.imageselection)
@@ -58,6 +57,8 @@ class widgets():
     button4 = QPushButton("4")
     button5 = QPushButton("5")
     button6 = QPushButton("6")
+
+    testlabel = QLabel("TEST")
 
     testbut1 = QPushButton("test 1")
     testbut2 = QPushButton("test 2")
@@ -129,10 +130,11 @@ class layout():
 
     tab1 = QTabWidget()
     tab1.addTab(widgets.exampic, "Image")
+    tab1.addTab(widgets.testlabel, "Graph")
 
     imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     imageframelayout = QGridLayout()
-    imageframe.setMinimumWidth(600)
+    imageframe.setMinimumWidth(700)
     imageframelayout.addWidget(tab1)
     imageframe.setLayout(imageframelayout)
 
