@@ -12,6 +12,15 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Reader")
         self.setGeometry(360,140,1200,800)
         self.setCentralWidget(layout.mainframe)
+        self.barmenu()
+    
+    def barmenu(self):
+        mainMenu = self.menuBar()
+        
+        fileMenu = mainMenu.addMenu("File")
+        newFile = fileMenu.addAction("Import File")
+        newFile.triggered.connect(functions.imageselection)
+        newFile.setShortcut("Ctrl+N")
 
 class functions():
     def imageselection():
