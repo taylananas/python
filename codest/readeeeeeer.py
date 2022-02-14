@@ -13,9 +13,9 @@ import pandas as pd
 from scipy import optimize
 import xlwt
 import xlsxwriter
-# from docx import Document
-# from docx.shared import Inches
-# import docx
+from docx import Document
+from docx.shared import Inches
+import docx
 # Some General Information
 
 # ----------------------------------------------------
