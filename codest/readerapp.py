@@ -14,10 +14,10 @@ class MainWindow(QMainWindow):
         self.setGeometry(360,140,1200,800)
         self.setCentralWidget(layout.mainframe)
         self.barmenu()
-    
+
     def barmenu(self):
         mainMenu = self.menuBar()
-        
+
         fileMenu = mainMenu.addMenu("File")
         newFile = fileMenu.addAction("Import File")
         newFile.triggered.connect(functions.imageselection)
@@ -27,17 +27,17 @@ class functions():
     def imageselection():
         filepath = QFileDialog.getOpenFileName(None, 'Select file', 'c:\\',"Image files (*.jpg *.png *.jfif)")
         pixmap = QPixmap(filepath[0])
-        widgets.exampic.setPixmap(pixmap) 
-        widgets.exampic.show()   
+        widgets.exampic.setPixmap(pixmap)
+        widgets.exampic.show()
         widgets.historytextbox.append(f"{functions.timecurrent()} New image selected at {filepath[0]}")
-    
+
     def clearvariablelayout():
         for i in reversed(range(layout.variableframelayout.count())):
             removedwidget = layout.variableframelayout.itemAt(i).widget()
             removedwidget.setParent(None)
             layout.variableframelayout.removeWidget(removedwidget)
         widgets.historytextbox.append(f"{functions.timecurrent()} New Layout")
-            
+
     def test1():
         functions.clearvariablelayout()
         layout.variableframelayout.addWidget(widgets.testbut1)
@@ -48,10 +48,10 @@ class functions():
         layout.variableframelayout.addWidget(widgets.testbut2)
 
     def timecurrent():
-        now = datetime.now().strftime("%H:%M:%S") 
+        now = datetime.now().strftime("%H:%M:%S")
         return now
 
-class widgets():    
+class widgets():
     button1 = QPushButton("1")
     button2 = QPushButton("2")
     button3 = QPushButton("3")
@@ -126,7 +126,7 @@ class layout():
     histvariframe.setLayout(histvarilayout)
 
     imageframe = QFrame()
-    
+
     tab1 = QTabWidget()
     tab1.addTab(widgets.exampic, "Image")
 
