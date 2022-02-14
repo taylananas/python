@@ -1,3 +1,4 @@
+from msilib.schema import Font
 from PySide6.QtWidgets import QApplication, QFrame, QGridLayout, QMainWindow, QTabWidget, QSizePolicy, QPushButton, QWidget, QLineEdit, QDialog, QTextEdit, QFileDialog, QLabel, QSplitter
 from PySide6.QtGui import QIcon, QAction, QPixmap, QFont
 from PySide6.QtCore import *
@@ -111,7 +112,8 @@ class layout():
     historyframe = QFrame()
     historyframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     historyframelayout = QGridLayout()
-    historyframelayout.addWidget(widgets.historytextbox)
+    historyframelayout.addWidget(widgets.historytextbox,1,0)
+    historyframelayout.addWidget(QLabel("History"),0,0)
     historyframe.setLayout(historyframelayout)
 
     widgets.splitter2.addWidget(variableframe)
@@ -130,10 +132,9 @@ class layout():
 
     imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     imageframelayout = QGridLayout()
-    imageframe.setMinimumWidth(400)
+    imageframe.setMinimumWidth(600)
     imageframelayout.addWidget(tab1)
     imageframe.setLayout(imageframelayout)
-
 
     widgets.splitter1.addWidget(histvariframe)
     widgets.splitter1.addWidget(imageframe)
