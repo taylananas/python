@@ -91,6 +91,7 @@ class widgets():
 
     splitter1 = QSplitter(Qt.Horizontal)
     splitter2 = QSplitter(Qt.Vertical)
+    splitter2.setMaximumSize(700,700)
 
 class layout():
     mainbuttonslayout = QGridLayout()
