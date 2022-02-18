@@ -11,7 +11,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow,self).__init__()
         self.setWindowTitle("Reader")
-        self.setGeometry(360,140,1200,800)
+        self.setGeometry(277,60,1366,900)
         self.setCentralWidget(layout.mainframe)
         self.barmenu()
 
@@ -64,12 +64,12 @@ class widgets():
     testbut2 = QPushButton("test 2")
     testbut3 = QPushButton("test 3")
 
-    button1.setFixedSize(100,100)
-    button2.setFixedSize(100,100)
-    button3.setFixedSize(100,100)
-    button4.setFixedSize(100,100)
-    button5.setFixedSize(100,100)
-    button6.setFixedSize(100,100)
+    button1.setFixedSize(80,80)
+    button2.setFixedSize(80,80)
+    button3.setFixedSize(80,80)
+    button4.setFixedSize(80,80)
+    button5.setFixedSize(80,80)
+    button6.setFixedSize(80,80)
 
     button1.clicked.connect(functions.imageselection)
     button2.clicked.connect(functions.test1)
@@ -87,7 +87,7 @@ class widgets():
     exampic = QLabel()
     exampic.setScaledContents(True)
     exampic.installEventFilter(None)
-    exampic.setMaximumSize(700,700)
+    exampic.setMaximumSize(1000,600)
 
     splitter1 = QSplitter(Qt.Horizontal)
     splitter2 = QSplitter(Qt.Vertical)
@@ -118,6 +118,7 @@ class layout():
     historyframe = QFrame()
     historyframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     historyframelayout = QGridLayout()
+    historyframe.setFixedSize(300,400)
     historyframelayout.addWidget(widgets.historytextbox,1,0)
     historyframelayout.addWidget(QLabel("History"),0,0)
     historyframe.setLayout(historyframelayout)
@@ -127,6 +128,7 @@ class layout():
 
     histvariframe = QFrame()
     histvariframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+    histvariframe.setFixedSize(300,600)
     histvarilayout = QGridLayout()
     histvarilayout.addWidget(widgets.splitter2)
     histvariframe.setLayout(histvarilayout)
@@ -139,15 +141,21 @@ class layout():
 
     imageframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     imageframelayout = QGridLayout()
-    imageframe.setMinimumWidth(700)
     imageframelayout.addWidget(tab1)
     imageframe.setLayout(imageframelayout)
+
+    tableframe = QFrame()
+    tableframe.setFrameStyle(QFrame.Box | QFrame.Raised)
+    tableframelayout = QGridLayout()
+    tableframe.setLayout(tableframelayout)
+    tableframe.setFixedSize(1366,300)
 
     widgets.splitter1.addWidget(histvariframe)
     widgets.splitter1.addWidget(imageframe)
 
     frameLayout = QGridLayout()
     frameLayout.addWidget(mainbuttonsframe,0,0,2,1)
+    frameLayout.addWidget(tableframe,2,0,1,3)
     frameLayout.addWidget(widgets.splitter1,0,2,2,1)
 
     mainframe = QWidget()
