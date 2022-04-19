@@ -118,7 +118,7 @@ class layout():
     historyframe = QFrame()
     historyframe.setFrameStyle(QFrame.Box | QFrame.Raised)
     historyframelayout = QGridLayout()
-    historyframe.setFixedSize(300,400)
+    historyframe.setFixedSize(300,350)
     historyframelayout.addWidget(widgets.historytextbox,1,0)
     historyframelayout.addWidget(QLabel("History"),0,0)
     historyframe.setLayout(historyframelayout)
