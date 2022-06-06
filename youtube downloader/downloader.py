@@ -1,9 +1,12 @@
 import tkinter as tk
 import customtkinter
 from tkinter import filedialog
-
+from pytube import YouTube
+from PIL import Image,ImageTk
+from urllib.request import urlopen
 from pip import main
 import ctypes
+import datetime
 
 customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -26,31 +29,60 @@ class App(customtkinter.CTk):
 
         # topLeft frame//options
 
-        topLeftFrame = customtkinter.CTkFrame(master=self)
-        topLeftFrame.grid(row=0,column=0)
+        topFrame = customtkinter.CTkFrame(master=self)
+        topFrame.grid(row=0,column=0)
 
-        topLeftFrame.grid_rowconfigure(9) #layout 10x10
-        topLeftFrame.grid_columnconfigure(9)
+        topFrame.grid_rowconfigure(9) #layout 10x10
+        topFrame.grid_columnconfigure(9)
 
-        self.optionsLabel = customtkinter.CTkLabel(master=topLeftFrame,text="Options")
+        self.optionsLabel = customtkinter.CTkLabel(master=topFrame,text="Options",height=35)
         self.optionsLabel.grid(row=0,column=0,columnspan=3)
 
-        self.filePathLabel = customtkinter.CTkLabel(master=topLeftFrame,text = "Filepath")
-        self.filePathLabel.grid(row=1,column=0,columnspan=3)
+        self.emptyLabel = customtkinter.CTkLabel(master=topFrame,text="")
+        self.emptyLabel.grid(row=1)
 
-        self.filePathText = tk.Text(master=topLeftFrame,bg = "#333333",fg = "silver",height =1,width = 50,state="normal")
-        self.filePathText.grid(row=2,column=0,columnspan=2)
-        self.filePathText.insert(1.0, "Filepath"); self.filePathText.config(state="disabled")
+        self.filePathLabel = customtkinter.CTkLabel(master=topFrame,text = "Filepath")
+        self.filePathLabel.grid(row=2,column=0,columnspan=3)
 
-        filePathButton = customtkinter.CTkButton(master=topLeftFrame,text="Set File Path",command=self.selectFilePath)
-        filePathButton.grid(row=2,column=2)
+        self.filePathText = tk.Entry(master=topFrame,disabledforeground = "silver",width = 60,state="normal",disabledbackground="#333333")
+        self.filePathText.grid(row=3,column=0,columnspan=2)
+        self.filePathText.insert(0,"Filepath for downloaded videos"); self.filePathText.config(state="disabled")
+
+        filePathButton = customtkinter.CTkButton(master=topFrame,text="Set File Path",command=self.selectFilePath)
+        filePathButton.grid(row=3,column=2)
+
+        #top right frame// video selection ,url insert etc.
+
+
+        customtkinter.CTkLabel(master=topFrame,text="").grid(row=1,rowspan=1,column=3)
+        customtkinter.CTkLabel(master=topFrame,text="URL",height=42).grid(row=0,column=3)
+
+
+        self.urlText = tk.Entry(master=topFrame,bg = "#333333",fg = "silver",width = 80)
+        self.urlText.grid(row=2,column=3)
+        searchButton = customtkinter.CTkButton(master=topFrame,text="Select Video",command=self.selectVideo).grid(row=3,column=3)
+        self.videoLabel = customtkinter.CTkLabel(master=topFrame,text="")
+        self.videoLabel.grid(row=4,column=3)
+
+
 
     def selectFilePath(self):
         filename = filedialog.askdirectory()
         self.filePathText.config(state = "normal")
-        self.filePathText.delete(1.0,"end")
-        self.filePathText.insert(1.0, filename)
+        self.filePathText.delete(0,"end")
+        self.filePathText.insert(0, filename)
         self.filePathText.config(state="disabled")
+
+    def selectVideo(self):
+        urlpaste = self.urlText.get()
+        ytvideo = YouTube(urlpaste)
+        videoTitle = ytvideo.title
+        videoLength = ytvideo.length
+        a = datetime.timedelta(seconds=videoLength)
+        self.videoLabel.configure(text=f"Video Title= {videoTitle}\n \nVideo Length= {a}")
+
+        ytvideo.streams
+
 
 
 app = App()
