@@ -1,6 +1,7 @@
 import tkinter as tk
 import customtkinter
-import tk.tkFileDialog
+from tkinter import filedialog
+
 from pip import main
 import ctypes
 
@@ -31,23 +32,26 @@ class App(customtkinter.CTk):
         topLeftFrame.grid_rowconfigure(9) #layout 10x10
         topLeftFrame.grid_columnconfigure(9)
 
-        optionsLabel = customtkinter.CTkLabel(master=topLeftFrame,text="Options")
-        optionsLabel.grid(row=0,column=0,columnspan=3)
+        self.optionsLabel = customtkinter.CTkLabel(master=topLeftFrame,text="Options")
+        self.optionsLabel.grid(row=0,column=0,columnspan=3)
 
-        filePathLabel = customtkinter.CTkLabel(master=topLeftFrame,text = "Filepath")
-        filePathLabel.grid(row=1,column=0,columnspan=3)
+        self.filePathLabel = customtkinter.CTkLabel(master=topLeftFrame,text = "Filepath")
+        self.filePathLabel.grid(row=1,column=0,columnspan=3)
 
-        filePathText = tk.Text(master=topLeftFrame,bg = "#333333",fg = "silver",height =1,width = 50,state="normal")
-        filePathText.grid(row=2,column=0,columnspan=2)
-        filePathText.insert(1.0, "Filepath"); filePathText.config(state="disabled")
+        self.filePathText = tk.Text(master=topLeftFrame,bg = "#333333",fg = "silver",height =1,width = 50,state="normal")
+        self.filePathText.grid(row=2,column=0,columnspan=2)
+        self.filePathText.insert(1.0, "Filepath"); self.filePathText.config(state="disabled")
 
-        filePathButton = customtkinter.CTkButton(master=topLeftFrame,text="Set File Path",command=functions.selectFilePath)
+        filePathButton = customtkinter.CTkButton(master=topLeftFrame,text="Set File Path",command=self.selectFilePath)
         filePathButton.grid(row=2,column=2)
 
-class functions():
-    def selectFilePath():
-        filename = ""
-        filename = tkFileDialog.askdirectory
+    def selectFilePath(self):
+        filename = filedialog.askdirectory()
+        self.filePathText.config(state = "normal")
+        self.filePathText.delete(1.0,"end")
+        self.filePathText.insert(1.0, filename)
+        self.filePathText.config(state="disabled")
+
 
 app = App()
 app.mainloop()
