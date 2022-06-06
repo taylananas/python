@@ -81,7 +81,7 @@ class App(customtkinter.CTk):
         a = datetime.timedelta(seconds=videoLength)
         self.videoLabel.configure(text=f"Video Title= {videoTitle}\n \nVideo Length= {a}")
 
-        ytvideo.streams
+        print(type(ytvideo.streams))
 
 
 
