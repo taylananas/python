@@ -64,27 +64,28 @@ class App(customtkinter.CTk):
 
         self.videoLabel = customtkinter.CTkLabel(master=topFrame,text="")
         self.videoLabel.grid(row=4,column=3,columnspan=2)
+        self.emptyLabel=customtkinter.CTkLabel(master=topFrame,text="Video Quality").grid(row=5,column=3,columnspan=2)
 
-        self.p144RadioButton = customtkinter.CTkRadioButton(value=17,master=topFrame,text="144p         ",state="disabled",variable = self.resValue)
-        self.p144RadioButton.grid(row=5,column=3,columnspan=2)
+        self.p144RadioButton = customtkinter.CTkRadioButton(value=17,command=self.getVideoSize,master=topFrame,text="144p         ",state="disabled",variable = self.resValue)
+        self.p144RadioButton.grid(row=6,column=3,columnspan=2)
 
-        self.p240RadioButton = customtkinter.CTkRadioButton(value=133,master=topFrame,text="240p         ",state="disabled",variable = self.resValue)
-        self.p240RadioButton.grid(row=6,column=3,columnspan=2)
+        self.p240RadioButton = customtkinter.CTkRadioButton(value=133,command=self.getVideoSize,master=topFrame,text="240p         ",state="disabled",variable = self.resValue)
+        self.p240RadioButton.grid(row=7,column=3,columnspan=2)
 
-        self.p360RadioButton = customtkinter.CTkRadioButton(master=topFrame,value=18,text="360p         ",state="disabled",variable = self.resValue)
-        self.p360RadioButton.grid(row=7,column=3,columnspan=2)
+        self.p360RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=18,text="360p         ",state="disabled",variable = self.resValue)
+        self.p360RadioButton.grid(row=8,column=3,columnspan=2)
 
-        self.p480RadioButton = customtkinter.CTkRadioButton(master=topFrame,value=135,text="480p         ",state="disabled",variable = self.resValue)
-        self.p480RadioButton.grid(row=8,column=3,columnspan=2)
+        self.p480RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=135,text="480p         ",state="disabled",variable = self.resValue)
+        self.p480RadioButton.grid(row=9,column=3,columnspan=2)
 
-        self.p72030RadioButton = customtkinter.CTkRadioButton(master=topFrame,value=22,text="720p/30f  ",state="disabled",variable = self.resValue)
-        self.p72030RadioButton.grid(row=9,column=3,columnspan=2)
+        self.p72030RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=22,text="720p/30f  ",state="disabled",variable = self.resValue)
+        self.p72030RadioButton.grid(row=10,column=3,columnspan=2)
 
-        self.p72060RadioButton = customtkinter.CTkRadioButton(master=topFrame,value=298,text="720p/60f  ",state="disabled",variable = self.resValue)
-        self.p72060RadioButton.grid(row=10,column=3,columnspan=2)
+        self.p72060RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=298,text="720p/60f  ",state="disabled",variable = self.resValue)
+        self.p72060RadioButton.grid(row=11,column=3,columnspan=2)
 
-        self.p1080RadioButton = customtkinter.CTkRadioButton(master=topFrame,value=299,text="1080p/60f",state="disabled",variable = self.resValue)
-        self.p1080RadioButton.grid(row=11,column=3,columnspan=2)
+        self.p1080RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=299,text="1080p/60f",state="disabled",variable = self.resValue)
+        self.p1080RadioButton.grid(row=12,column=3,columnspan=2)
 
         """
         17-144p
@@ -108,9 +109,9 @@ class App(customtkinter.CTk):
 
     def selectVideo(self):
         urlpaste = self.urlText.get()
-        ytvideo = YouTube(urlpaste)
-        videoTitle = ytvideo.title
-        videoLength = ytvideo.length
+        self.ytvideo = YouTube(urlpaste)
+        videoTitle = self.ytvideo.title
+        videoLength = self.ytvideo.length
         a = datetime.timedelta(seconds=videoLength)
         self.videoLabel.configure(text=f"Video Title= {videoTitle}\n \nVideo Length= {a}")
 
@@ -122,7 +123,10 @@ class App(customtkinter.CTk):
         self.p72060RadioButton.configure(state="disabled")
         self.p1080RadioButton.configure(state="disabled")
 
-        for i in ytvideo.streams:
+
+        self.openButton()
+
+        for i in self.ytvideo.streams:
             if i.itag == 17:
                 self.p144RadioButton.configure(state="normal")
             elif i.itag == 133:
@@ -138,11 +142,21 @@ class App(customtkinter.CTk):
             elif i.itag == 299:
                 self.p1080RadioButton.configure(state="normal")
 
+
     def downloadVideo(self):
         self.itagValue = self.resValue.get()
         self.filePath = self.filename
-        self.stream = ytvideo.streams.get_by_itag(self.resValue.get())
+        self.stream = self.ytvideo.streams.get_by_itag(self.resValue.get())
         stream.download(output_path=self.filePath)
+
+    def getVideoSize(self):
+        self.itagValue2 = self.resValue.get()
+        self.stream2 = self.ytvideo.streams.get_by_itag(self.itagValue2)
+        self.videoFileSize = self.stream2.filesize
+        print(self.videoFileSize)
+
+    def openButton(self):
+        self.downloadButton.configure(state="normal")
 
 app = App()
 app.mainloop()
