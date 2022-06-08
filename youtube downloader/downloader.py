@@ -167,18 +167,19 @@ class App(customtkinter.CTk):
         self.mbFileSize = "{:.2f}".format(self.videoFileSize/(1024*1024))
         print(self.mbFileSize)
         self.downloadLabel.configure(text=f"0MB/{self.mbFileSize}MB")
+        self.downloadProgressBar.set(0)
 
     def openButton(self):
         self.downloadButton.configure(state="normal")
 
     def progress_func(self,stream, chunk, bytes_remaining):
+        chunk = 3145728
         self.curr = int(self.stream.filesize) - int(bytes_remaining)
-        self.formatCurr = ("{:.2f}".format(self.curr)/(1024*1024))
+        self.formatCurr = ("{:.2f}".format((self.curr)/(1024*1024)))
         self.done = float(self.curr / self.stream.filesize)
-        self.formatDone = ("{:.2f}".format(self.done/(1024*1024)))
         self.downloadedPart = ("{:.2f}".format((self.stream.filesize-bytes_remaining)/(1024*1024)))
-        print(self.formatDone)
-        #self.downloadProgressBar.set(self.formatDone)
+        self.barProgress = float(self.downloadedPart) / float(self.mbFileSize)
+        self.downloadProgressBar.set(self.barProgress)
         self.downloadLabel.configure(text= f"{self.downloadedPart}MB / {self.mbFileSize}MB ")
 
 
