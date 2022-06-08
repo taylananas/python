@@ -7,6 +7,7 @@ from urllib.request import urlopen
 from pip import main
 import ctypes
 import datetime
+import threading
 
 customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -97,19 +98,25 @@ class App(customtkinter.CTk):
         299-1080p/60f
         """
 
-        self.downloadButton = customtkinter.CTkButton(master=topFrame,text="Download Video",state="disabled")
+        self.downloadButton = customtkinter.CTkButton(master=topFrame,text="Download Video",state="disabled",command=self.downloadVideo)
         self.downloadButton.grid(row=3,column=4)
 
+        self.downloadProgressBar = customtkinter.CTkProgressBar(master=topFrame,width=400)
+        self.downloadProgressBar.set(0)
+        self.downloadProgressBar.grid(row=7,column=0,columnspan=2)
+        self.downloadLabel = customtkinter.CTkLabel(master=topFrame,text="0MB/0MB")
+        self.downloadLabel.grid(row=7,column=2)
+
     def selectFilePath(self):
-        filename = filedialog.askdirectory()
+        self.filename = filedialog.askdirectory()
         self.filePathText.config(state = "normal")
         self.filePathText.delete(0,"end")
-        self.filePathText.insert(0, filename)
+        self.filePathText.insert(0, self.filename)
         self.filePathText.config(state="disabled")
 
     def selectVideo(self):
         urlpaste = self.urlText.get()
-        self.ytvideo = YouTube(urlpaste)
+        self.ytvideo = YouTube(urlpaste, on_progress_callback=self.progress_func)
         videoTitle = self.ytvideo.title
         videoLength = self.ytvideo.length
         a = datetime.timedelta(seconds=videoLength)
@@ -144,19 +151,38 @@ class App(customtkinter.CTk):
 
 
     def downloadVideo(self):
+        x = threading.Thread(target=self.threadDownloadVideo)
+        x.start()
+
+    def threadDownloadVideo(self):
         self.itagValue = self.resValue.get()
         self.filePath = self.filename
         self.stream = self.ytvideo.streams.get_by_itag(self.resValue.get())
-        stream.download(output_path=self.filePath)
+        self.stream.download(output_path=self.filePath)
 
     def getVideoSize(self):
         self.itagValue2 = self.resValue.get()
         self.stream2 = self.ytvideo.streams.get_by_itag(self.itagValue2)
         self.videoFileSize = self.stream2.filesize
-        print(self.videoFileSize)
+        self.mbFileSize = "{:.2f}".format(self.videoFileSize/(1024*1024))
+        print(self.mbFileSize)
+        self.downloadLabel.configure(text=f"0MB/{self.mbFileSize}MB")
 
     def openButton(self):
         self.downloadButton.configure(state="normal")
+
+    def progress_func(self,stream, chunk, bytes_remaining):
+        self.curr = int(self.stream.filesize) - int(bytes_remaining)
+        self.formatCurr = ("{:.2f}".format(self.curr)/(1024*1024))
+        self.done = float(self.curr / self.stream.filesize)
+        self.formatDone = ("{:.2f}".format(self.done/(1024*1024)))
+        self.downloadedPart = ("{:.2f}".format((self.stream.filesize-bytes_remaining)/(1024*1024)))
+        print(self.formatDone)
+        #self.downloadProgressBar.set(self.formatDone)
+        self.downloadLabel.configure(text= f"{self.downloadedPart}MB / {self.mbFileSize}MB ")
+
+
+
 
 app = App()
 app.mainloop()
