@@ -13,22 +13,23 @@ customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark",
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 user32 = ctypes.windll.user32
-screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) #ekran cozunurlugunu aliyorum
 width = screensize[0]
 height = screensize[1]
 
 
 class App(customtkinter.CTk):
     def __init__(self):
+        """
+        Programın tüm widgetleri ve widgetlerin yerleri burada tanımlanıyor.
+
+        Tek bir frame kullandim ve hepsini ayni grid sistemine atadim
+
+        """
         super().__init__()
 
-        self.geometry(f"{int(width*0.6)}x{int(height*0.6)}")
+        self.geometry(f"{int(width*0.6)}x{int(height*0.32)}") #uygulama boyutunun sabit olmasi icin
         self.title("Youtube Downloader")
-
-        self.grid_columnconfigure(1) #2x2 grid
-        self.grid_rowconfigure(1)
-
-        # topLeft frame//options
 
         topFrame = customtkinter.CTkFrame(master=self)
         topFrame.grid(row=0,column=0)
@@ -52,8 +53,7 @@ class App(customtkinter.CTk):
         filePathButton = customtkinter.CTkButton(master=topFrame,text="Set File Path",command=self.selectFilePath)
         filePathButton.grid(row=3,column=2)
 
-        #top right frame// video selection ,url insert etc.
-        self.resValue= tk.IntVar(value=0)
+        self.resValue= tk.IntVar(value=0) #Radiobuttonlarin ortak olmasi icin ayni degere atama
 
         customtkinter.CTkLabel(master=topFrame,text="").grid(row=1,rowspan=1,column=3,columnspan=2)
         customtkinter.CTkLabel(master=topFrame,text="URL",height=42).grid(row=0,column=3,columnspan=2)
@@ -66,7 +66,9 @@ class App(customtkinter.CTk):
         self.videoLabel = customtkinter.CTkLabel(master=topFrame,text="")
         self.videoLabel.grid(row=4,column=3,columnspan=2)
         self.emptyLabel=customtkinter.CTkLabel(master=topFrame,text="Video Quality").grid(row=5,column=3,columnspan=2)
-
+        """
+        Su anda yalnizca video indirme secenekleri var yakin zamanda mp3 seceneklerini de ekleyecegim
+        """
         self.p144RadioButton = customtkinter.CTkRadioButton(value=17,command=self.getVideoSize,master=topFrame,text="144p         ",state="disabled",variable = self.resValue)
         self.p144RadioButton.grid(row=6,column=3,columnspan=2)
 
@@ -88,16 +90,6 @@ class App(customtkinter.CTk):
         self.p1080RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=299,text="1080p/60f",state="disabled",variable = self.resValue)
         self.p1080RadioButton.grid(row=12,column=3,columnspan=2)
 
-        """
-        17-144p
-        133-240p
-        18-360p
-        135-480p
-        22-720p/30f
-        298-720p/60f
-        299-1080p/60f
-        """
-
         self.downloadButton = customtkinter.CTkButton(master=topFrame,text="Download Video",state="disabled",command=self.downloadVideo)
         self.downloadButton.grid(row=3,column=4)
 
@@ -108,6 +100,10 @@ class App(customtkinter.CTk):
         self.downloadLabel.grid(row=7,column=2)
 
     def selectFilePath(self):
+        """
+        Butona atanan komut:
+        Kullanicidan videolari indirecegi klasoru secmesini istiyor ve bunu bir string degerine atiyor
+        """
         self.filename = filedialog.askdirectory()
         self.filePathText.config(state = "normal")
         self.filePathText.delete(0,"end")
@@ -115,15 +111,18 @@ class App(customtkinter.CTk):
         self.filePathText.config(state="disabled")
 
     def selectVideo(self):
+        """
+        URL kismina yazilan urlden "pytube" modulu ile videoyu bulmak ve video cozunurluk degerlerine gore gerekli radiobuttonlari acmak icin kullaniliyor
+        """
         urlpaste = self.urlText.get()
-        self.ytvideo = YouTube(urlpaste, on_progress_callback=self.progress_func)
+        self.ytvideo = YouTube(urlpaste, on_progress_callback=self.progress_func) #urlpaste video url'si, on_progress_callback ise indirme sirasinda fonksiyon calistirmaya yariyor
         videoTitle = self.ytvideo.title
         videoLength = self.ytvideo.length
-        a = datetime.timedelta(seconds=videoLength)
+        a = datetime.timedelta(seconds=videoLength) #video uzunlugunu saniyeden HH:MM:SS cinsine cevirme
         self.videoLabel.configure(text=f"Video Title= {videoTitle}\n \nVideo Length= {a}")
 
-        self.p144RadioButton.configure(state="disabled")
-        self.p240RadioButton.configure(state="disabled")
+        self.p144RadioButton.configure(state="disabled") #once tum radiobuttonlari devre disi birakiyorum
+        self.p240RadioButton.configure(state="disabled") #boylece yeni video eklendiginde yeni cozunurluge gore ayar yapilabilir
         self.p360RadioButton.configure(state="disabled")
         self.p480RadioButton.configure(state="disabled")
         self.p72030RadioButton.configure(state="disabled")
@@ -131,8 +130,11 @@ class App(customtkinter.CTk):
         self.p1080RadioButton.configure(state="disabled")
 
 
-        self.openButton()
-
+        self.downloadButton.configure(state="normal") #indirme butonunu aktiflestirme
+        """
+        modul tum cozunurlukleri bir listeye atiyor
+        bu listeyi okuyup gerekli radiobuttonlari aciyorum
+        """
         for i in self.ytvideo.streams:
             if i.itag == 17:
                 self.p144RadioButton.configure(state="normal")
@@ -149,38 +151,32 @@ class App(customtkinter.CTk):
             elif i.itag == 299:
                 self.p1080RadioButton.configure(state="normal")
 
-
-    def downloadVideo(self):
+    def downloadVideo(self): #secilen cozunurlukte videoyu indirme
         x = threading.Thread(target=self.threadDownloadVideo)
-        x.start()
+        x.start() #thread kullanmamin sebebi kullanilmazsa video inerken baska bir islem yapmak mumkun olmuyor
 
-    def threadDownloadVideo(self):
+    def threadDownloadVideo(self):  #radiobutton degerini okuyup videoyu indirme
         self.itagValue = self.resValue.get()
         self.filePath = self.filename
         self.stream = self.ytvideo.streams.get_by_itag(self.resValue.get())
         self.stream.download(output_path=self.filePath)
 
-    def getVideoSize(self):
+    def getVideoSize(self):  #videonun boyutunu almak ve bunu mb cinsinden yazmak icin
         self.itagValue2 = self.resValue.get()
         self.stream2 = self.ytvideo.streams.get_by_itag(self.itagValue2)
         self.videoFileSize = self.stream2.filesize
         self.mbFileSize = "{:.2f}".format(self.videoFileSize/(1024*1024))
-        print(self.mbFileSize)
         self.downloadLabel.configure(text=f"0MB/{self.mbFileSize}MB")
         self.downloadProgressBar.set(0)
 
-    def openButton(self):
-        self.downloadButton.configure(state="normal")
-
     def progress_func(self,stream, chunk, bytes_remaining):
-        chunk = 3145728
-        self.curr = int(self.stream.filesize) - int(bytes_remaining)
-        self.formatCurr = ("{:.2f}".format((self.curr)/(1024*1024)))
-        self.done = float(self.curr / self.stream.filesize)
-        self.downloadedPart = ("{:.2f}".format((self.stream.filesize-bytes_remaining)/(1024*1024)))
-        self.barProgress = float(self.downloadedPart) / float(self.mbFileSize)
-        self.downloadProgressBar.set(self.barProgress)
-        self.downloadLabel.configure(text= f"{self.downloadedPart}MB / {self.mbFileSize}MB ")
+        """
+        Videoyu indirirken ne kadarının indirildiğini ve ne kadar kaldığını göstermeye yarayan fonksiyon
+        """
+        self.downloadedPart = ("{:.2f}".format((self.stream.filesize-bytes_remaining)/(1024*1024))) # kaç byte indirildi ve bunu 2 decimal'li floata cevirme
+        self.barProgress = float(self.downloadedPart) / float(self.mbFileSize) #Progress bar'a 0-1 arası deger girmek icin oran hesabı
+        self.downloadProgressBar.set(self.barProgress) #Progress bar deger atama
+        self.downloadLabel.configure(text= f"{self.downloadedPart}MB / {self.mbFileSize}MB ") #Progress bar yanındaki label'de yazılı kalan mb hesabı
 
 
 
