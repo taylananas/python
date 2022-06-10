@@ -28,7 +28,7 @@ class App(customtkinter.CTk):
         """
         super().__init__()
 
-        self.geometry(f"{int(width*0.6)}x{int(height*0.32)}") #uygulama boyutunun sabit olmasi icin
+        self.geometry(f"{int(width*0.6)}x{int(height*0.34)}") #uygulama boyutunun sabit olmasi icin
         self.title("Youtube Downloader")
 
         topFrame = customtkinter.CTkFrame(master=self)
