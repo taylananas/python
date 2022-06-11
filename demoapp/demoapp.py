@@ -21,8 +21,7 @@ class App(customtkinter.CTk):
         topFrame = customtkinter.CTkFrame(master=self)
         topFrame.grid(row=0,column=0)
 
-        topFrame.grid_rowconfigure(2)#layout 1b-2b-1w-2b-1w-1b    b=bosluk w=widget
-        topFrame.grid_columnconfigure(1)
+    
 
         self.topEntryLeft = customtkinter.CTkEntry(master=topFrame,width=330)
         self.topEntryLeft.grid(row=0,column=0,padx=20,pady=60)
@@ -36,10 +35,10 @@ class App(customtkinter.CTk):
         self.rightButton = customtkinter.CTkButton(master=topFrame,text="Button 2")
         self.rightButton.grid(row=1,column=1,padx=20,pady=50)
 
-        self.leftTextBox = tk.Text(master=topFrame,bg="#333333",width=48)
+        self.leftTextBox = tk.Text(master=topFrame,bg="#333333",width=48,fg="silver")
         self.leftTextBox.grid(row=2,column=0)
 
-        self.rightTextBox = tk.Text(master=topFrame,bg="#333333",width=48)
+        self.rightTextBox = tk.Text(master=topFrame,bg="#333333",width=48,fg="silver")
         self.rightTextBox.grid(row=2,column=1)
 
 
