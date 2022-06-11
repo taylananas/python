@@ -21,8 +21,6 @@ class App(customtkinter.CTk):
         topFrame = customtkinter.CTkFrame(master=self)
         topFrame.grid(row=0,column=0)
 
-    
-
         self.topEntryLeft = customtkinter.CTkEntry(master=topFrame,width=330)
         self.topEntryLeft.grid(row=0,column=0,padx=20,pady=60)
 
