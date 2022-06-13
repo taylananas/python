@@ -66,9 +66,7 @@ class App(customtkinter.CTk):
         self.videoLabel = customtkinter.CTkLabel(master=topFrame,text="")
         self.videoLabel.grid(row=4,column=3,columnspan=2)
         self.emptyLabel=customtkinter.CTkLabel(master=topFrame,text="Video Quality").grid(row=5,column=3,columnspan=2)
-        """
-        Su anda yalnizca video indirme secenekleri var yakin zamanda mp3 seceneklerini de ekleyecegim
-        """
+
         self.p144RadioButton = customtkinter.CTkRadioButton(value=17,command=self.getVideoSize,master=topFrame,text="144p         ",state="disabled",variable = self.resValue)
         self.p144RadioButton.grid(row=6,column=3,columnspan=2)
 
@@ -90,7 +88,10 @@ class App(customtkinter.CTk):
         self.p1080RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=299,text="1080p/60f",state="disabled",variable = self.resValue)
         self.p1080RadioButton.grid(row=12,column=3,columnspan=2)
 
-        self.downloadButton = customtkinter.CTkButton(master=topFrame,text="Download Video",state="disabled",command=self.downloadVideo)
+        self.kbps128RadioButton = customtkinter.CTkRadioButton(master=topFrame,command=self.getVideoSize,value=250,text="Mp3",state="disabled",variable = self.resValue)
+        self.kbps128RadioButton.grid(row=8,column=4,columnspan=2)
+
+        self.downloadButton = customtkinter.CTkButton(master=topFrame,text="Download",state="disabled",command=self.downloadVideo)
         self.downloadButton.grid(row=3,column=4)
 
         self.downloadProgressBar = customtkinter.CTkProgressBar(master=topFrame,width=400)
@@ -128,6 +129,7 @@ class App(customtkinter.CTk):
         self.p72030RadioButton.configure(state="disabled")
         self.p72060RadioButton.configure(state="disabled")
         self.p1080RadioButton.configure(state="disabled")
+        self.kbps128RadioButton.configure(state="disabled")
 
 
         self.downloadButton.configure(state="normal") #indirme butonunu aktiflestirme
@@ -150,6 +152,8 @@ class App(customtkinter.CTk):
                 self.p72060RadioButton.configure(state="normal")
             elif i.itag == 299:
                 self.p1080RadioButton.configure(state="normal")
+            elif i.itag == 250:
+                self.kbps128RadioButton.configure(state="normal")
 
     def downloadVideo(self): #secilen cozunurlukte videoyu indirme
         x = threading.Thread(target=self.threadDownloadVideo)
