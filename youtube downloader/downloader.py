@@ -21,7 +21,7 @@ height = screensize[1]
 class App(customtkinter.CTk):
     def __init__(self):
         """
-        Programın tüm widgetleri ve widgetlerin yerleri burada tanımlanıyor.
+        Programin tüm widgetleri ve widgetlerin yerleri burada tanimlaniyor.
 
         Tek bir frame kullandim ve hepsini ayni grid sistemine atadim
 
@@ -175,12 +175,12 @@ class App(customtkinter.CTk):
 
     def progress_func(self,stream, chunk, bytes_remaining):
         """
-        Videoyu indirirken ne kadarının indirildiğini ve ne kadar kaldığını göstermeye yarayan fonksiyon
+        Videoyu indirirken ne kadarinin indirildiğini ve ne kadar kaldiğini göstermeye yarayan fonksiyon
         """
         self.downloadedPart = ("{:.2f}".format((self.stream.filesize-bytes_remaining)/(1024*1024))) # kaç byte indirildi ve bunu 2 decimal'li floata cevirme
-        self.barProgress = float(self.downloadedPart) / float(self.mbFileSize) #Progress bar'a 0-1 arası deger girmek icin oran hesabı
+        self.barProgress = float(self.downloadedPart) / float(self.mbFileSize) #Progress bar'a 0-1 arasi deger girmek icin oran hesabi
         self.downloadProgressBar.set(self.barProgress) #Progress bar deger atama
-        self.downloadLabel.configure(text= f"{self.downloadedPart}MB / {self.mbFileSize}MB ") #Progress bar yanındaki label'de yazılı kalan mb hesabı
+        self.downloadLabel.configure(text= f"{self.downloadedPart}MB / {self.mbFileSize}MB ") #Progress bar yanindaki label'de yazili kalan mb hesabi
 
 
 

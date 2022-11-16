@@ -20,5 +20,12 @@ b =[]
 
 for i in range(len(a.keys())):
     b.append([list(a.keys())[i],list(a.values())[i]])
-name_count = collections.Counter(names)
-c = []
+c = 0
+all_names = ""
+temp2 = []
+for i in names[1:]:
+    temp2.append(i[0])
+temp2.sort()
+for i in temp2:
+    all_names += i
+print(all_names)
