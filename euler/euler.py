@@ -71,8 +71,23 @@ def euler11():
     numbers = text.split(" ")
     print(numbers)
 
-euler11()
+def euler12():
+    num = pow(2,1000)
+    numstr = str(num)
+    sum = 0
+    for i in numstr:
+        sum += int(i)
+    print(sum)
 
+def euler13():
+    sum = 0
+    f = open("number13.txt")
+    flist = f.readlines()
+    for i in flist:
+        sum += int(i)
+    print(str(sum)[:10])
+
+euler13()
 
 endtime = time.time()
 runtime = endtime-starttime
