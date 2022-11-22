@@ -96,24 +96,8 @@ def area(string):
     areas.append(a4)
 
     if vex[3] == vex2[3]:
-        if vex[1] == vex2[1] or vex[1][0] == vex[2][0]:
-            print("Case 1")
-            alan = a4
-        elif vex[1]== vex2[2]:
-            ucgenalan = 0
-            print("FUCKING APTAL CASE 4")
-            if vex[1][1]>vex[2][1]:
-                print("Left arrow case 4")
-                s = (b+c+e2)/2
-                ucgenalan = (vex[1][0]-vex[2][0])/(vex[3][0]-vex[2][0])*(s*(s-b)*(s-e2)*(s-c))**(1/2)
-                print(ucgenalan)
-                alan = a4 + ucgenalan
-            elif vex[1][1]<vex[2][1]:
-                print("Right Arrow Case 4")
-                s = (b+a+e1)/2
-                ucgenalan = (vex[1][0]-vex[2][0])/(vex[1][0]-vex[0][0])*(s*(s-b)*(s-e1)*(s-a))**(1/2)
-                print(ucgenalan)
-                alan = a4 + ucgenalan
+        print("Case 1")
+        alan = a4
 
     if vex[2]==vex2[3]:
         print("Case2")
@@ -156,7 +140,9 @@ def areaformatter():
     string = f"[({vexs[0]},{vexs[1]}), ({vexs[2]},{vexs[3]}), ({vexs[4]},{vexs[5]}), ({vexs[6]},{vexs[7]})]"
     print(string)
     return string
-
-area(input())
+f = open("cases.txt")
+temp = f.read().splitlines()
+for i in temp:
+    area(i)
 
 
