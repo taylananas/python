@@ -123,9 +123,7 @@ def areaformatter():
     string = f"[({vexs[0]},{vexs[1]}), ({vexs[2]},{vexs[3]}), ({vexs[4]},{vexs[5]}), ({vexs[6]},{vexs[7]})]"
     print(string)
     return string
-f = open("cases.txt")
-temp = f.read().splitlines()
-for i in temp:
-    area(i)
+
+area(areaformatter())
 
 
