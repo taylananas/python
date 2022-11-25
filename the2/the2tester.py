@@ -3,16 +3,24 @@ answers = open("answers.txt")
 temp = cases.read().splitlines()
 temp2 = answers.read().splitlines()
 wrongs = []
+diffs = []
 
+#this questions should contain simple and some extreme cases but do not worry 'i hope', all are calculated by my brain (also my code too)so the answers should be right
+#if you think there are some problems with the cases-answers or just want to ask something, just mail me at 'taylan.sahin@metu.edu.tr' 
+#i hope you all (including me ofc) get 100 from the 'the'
+
+#      We will not going to include the area of little triangle!
 """
-
 HOW TO USE:
+COPY YOUR CODE INTO THE def testing() area
+erase any unnecessary print's like you are uploading it to odtuclass
+
 WRITE "inputxt" in the input statement's right side
 for example if your code is like:
 
 inputvalues = input()
 
-CHANGE THIS AS
+CHANGE THIS AS:
 inputvalues = inputxt
 
 and instead of printing the answer, return it
@@ -24,8 +32,8 @@ print(finalanswer)
 
 INSTEAD OF PRINT, WRITE:
 return finalanswer
-
 """
+
 def testing(inputxt):
     negcheck = 0
     vexes = eval(inputxt)
@@ -96,22 +104,34 @@ def testing(inputxt):
             tri2 = (s2*(s2-c)*(s2-d)*(s2-e1))**(1/2)
             alan = a1-(tri1+tri2)
 
-    alan = "%.4f"%alan 
-    alan = float(str(alan[:-2]))
     alan = "%.2f"%alan
-    return alan
+    return (alan)
 
-def grading():
+
+def grading(): #a simple check for cases and answers, nothing fancy here
     total = len(temp)
     grade = 0
     for i in range(total):
-        if testing(temp[i]) == temp2[i]:
-            grade +=1
-        else:
-            wrongs.append(i+1)
-    
+        if type(testing(temp[i])) == str:
+            if testing(temp[i]) == temp2[i]:
+                grade +=1
+            else:
+                diff = float(testing(temp[i])) - float(temp2[i])
+                diff = "%.2f"%diff
+                diffs.append(diff)
+                wrongs.append(i+1)
+        elif type(testing(temp[i]))==float:
+            if testing(temp[i]) == float(temp2[i]):
+                grade +=1
+            else:
+                diff = float(testing(temp[i])) - float(temp2[i])
+                diff = "%.2f"%diff
+                diffs.append(diff)
+                wrongs.append(i+1)            
+
     print(f"{grade}/{total}")
     print(f"Wrong questions are: {wrongs}")
+    print(f"Diffs from the answers in the same order: {diffs}")
 
-grading()
+grading() #runs the grading function which runs the testing function which returns a value that the grading function checks 'w'
 

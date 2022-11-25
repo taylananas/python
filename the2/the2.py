@@ -1,7 +1,7 @@
 negcheck = 0
-vexes = eval(input())
+vexes = eval(input()) #takes input and converts it into a list with 4 tuples
 listvexs = vexes
-listvexs[0]=list(vexes[0])
+listvexs[0]=list(vexes[0]) #converts tuples to lists
 listvexs[1]=list(vexes[1])
 listvexs[2]=list(vexes[2])
 listvexs[3]=list(vexes[3])
@@ -67,7 +67,5 @@ if vex[1]==vex2[3]:
         tri2 = (s2*(s2-c)*(s2-d)*(s2-e1))**(1/2)
         alan = a1-(tri1+tri2)
 
-alan = "%.4f"%alan 
-alan = float(str(alan[:-2]))
 alan = "%.2f"%alan
 print(alan)
