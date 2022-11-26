@@ -45,23 +45,29 @@ def area(string):
     a2= (vex[1][1]+vex[2][1])*abs(vex[1][0]-vex[2][0])/2
     a3= (vex[2][1]+vex[3][1])*abs(vex[2][0]-vex[3][0])/2
     a4= (vex[3][1]+vex[0][1])*abs(vex[3][0]-vex[0][0])/2
-
-    if vex[3] == vex2[3]:
+    print(f"Normals : {vex}\n Sorted : {vex2}")
+    if vex[3][0] == vex2[3][0]:
+        print("klasik 1")
         alan = a4
-    if vex[2]==vex2[3]:
+    elif vex[2]==vex2[3]:
+        print("klasik 2")
         alan = a4 + a3
-    if vex[1]==vex2[3]:
+    elif vex[1]==vex2[3]:
         if vex[2][0]==vex[3][0]:
+            print("this")
             alan = a4+a2
         elif vex[2][0]==vex2[2][0]:
+            print("thisnt")
             alan = a2+a3+a4
         elif vex[2][1]<vex[3][1]:
+            print("this must")
             s1 = (e2+a+d)/2
             s2 = (e2+b+c)/2
             tri1 = (s1*(s1-a)*(s1-e2)*(s1-d))**(1/2)
             tri2 = (s2*(s2-b)*(s2-e2)*(s2-c))**(1/2)
             alan = a1-(tri1+tri2)
         elif vex[2][1]>vex[3][1]:
+            print("this must not")
             s1 = (e1+a+b)/2
             s2 = (e1+d+c)/2
             tri1 = (s1*(s1-a)*(s1-b)*(s1-e1))**(1/2)
@@ -80,6 +86,6 @@ def areaformatter():
     print(string)
     return string
 
-area(areaformatter())
+area(input())
 
 

@@ -36,9 +36,9 @@ return finalanswer
 
 def testing(inputxt):
     negcheck = 0
-    vexes = eval(inputxt)
+    vexes = eval(inputxt) #takes input and converts it into a list with 4 tuples
     listvexs = vexes
-    listvexs[0]=list(vexes[0])
+    listvexs[0]=list(vexes[0]) #converts tuples to lists
     listvexs[1]=list(vexes[1])
     listvexs[2]=list(vexes[2])
     listvexs[3]=list(vexes[3])
@@ -82,11 +82,11 @@ def testing(inputxt):
     a3= (vex[2][1]+vex[3][1])*abs(vex[2][0]-vex[3][0])/2
     a4= (vex[3][1]+vex[0][1])*abs(vex[3][0]-vex[0][0])/2
 
-    if vex[3] == vex2[3]:
+    if vex[3][0] == vex2[3][0]:
         alan = a4
-    if vex[2]==vex2[3]:
+    elif vex[2]==vex2[3]:
         alan = a4 + a3
-    if vex[1]==vex2[3]:
+    elif vex[1]==vex2[3]:
         if vex[2][0]==vex[3][0]:
             alan = a4+a2
         elif vex[2][0]==vex2[2][0]:
@@ -106,7 +106,6 @@ def testing(inputxt):
 
     alan = "%.2f"%alan
     return (alan)
-
 
 def grading(): #a simple check for cases and answers, nothing fancy here
     total = len(temp)
