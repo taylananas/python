@@ -45,11 +45,11 @@ a2= (vex[1][1]+vex[2][1])*abs(vex[1][0]-vex[2][0])/2
 a3= (vex[2][1]+vex[3][1])*abs(vex[2][0]-vex[3][0])/2
 a4= (vex[3][1]+vex[0][1])*abs(vex[3][0]-vex[0][0])/2
 
-if vex[3] == vex2[3]:
+if vex[3][0] == vex2[3][0]:
     alan = a4
-if vex[2]==vex2[3]:
+elif vex[2][0]==vex2[3][0]:
     alan = a4 + a3
-if vex[1]==vex2[3]:
+elif vex[1][0]==vex2[3][0]:
     if vex[2][0]==vex[3][0]:
         alan = a4+a2
     elif vex[2][0]==vex2[2][0]:
