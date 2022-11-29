@@ -87,6 +87,9 @@ def testing(inputxt):
     elif vex[2][0]==vex2[3][0]:
         alan = a4 + a3
     elif vex[1][0]==vex2[3][0]:
+    elif vex[2]==vex2[3]:
+        alan = a4 + a3
+    elif vex[1]==vex2[3]:
         if vex[2][0]==vex[3][0]:
             alan = a4+a2
         elif vex[2][0]==vex2[2][0]:
