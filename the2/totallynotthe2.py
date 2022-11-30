@@ -86,6 +86,6 @@ def areaformatter():
     print(string)
     return string
 
-area(input())
+area(areaformatter())
 
 
