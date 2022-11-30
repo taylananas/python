@@ -12,10 +12,10 @@ import threading
 customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
-user32 = ctypes.windll.user32
-screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) #ekran cozunurlugunu aliyorum
-width = screensize[0]
-height = screensize[1]
+# user32 = ctypes.windll.user32
+# screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1) #ekran cozunurlugunu aliyorum
+width = 1920
+height = 1080
 
 
 class App(customtkinter.CTk):
