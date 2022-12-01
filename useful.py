@@ -1,6 +1,6 @@
 def quadratic(a,b,c): #finds roots of a quadratic equation
     disc = discriminant(a,b,c)
-    kokler = ((-b + disc)/(2*a)), ((-b - disc)/(2*a))
+    kokler = ((-b + disc**0.5)/(2*a)), ((-b - disc**0.5)/(2*a))
     return kokler
 
 def discriminant(a,b,c): #finds discriminant of a quadratic equation
@@ -31,3 +31,4 @@ def potentialenergy(m,g,h): #finds potential energy of an object
     pe = m*g*h
     return pe
 
+print(quadratic(30,-735,-11025))
