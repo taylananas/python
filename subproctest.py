@@ -6,5 +6,3 @@ tempanswers = answers.read().splitlines()
 
 cases.close()
 answers.close()
-
-def testing(input,output):
