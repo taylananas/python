@@ -1,8 +1,6 @@
 import string as s
 import random as r
 
-
-
 def random_little(text):
     text = eval(text)
     part = []
@@ -43,10 +41,9 @@ def boom(total):
     f = open("test_patterns", "a")
     while count < total:
         p1 = random_little(test_i)
-        if len(p1) > 2:
-            if len(p1[0]) > 2:
-                f.write(str(p1)+"\n")
-                count += 1
+        if len(p1) > 2 and len(p1[0]) > 2:
+            f.write(str(p1)+"\n")
+            count += 1
     f.close()
 
 
