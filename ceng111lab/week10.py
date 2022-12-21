@@ -49,5 +49,4 @@ def binary_search(lst,element):
     else: 
         return False
 
-print(binary_search(list(range(2**22)),1))
-
+print(binary_search(list(range(2**22)),8192))
