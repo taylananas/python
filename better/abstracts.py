@@ -2,31 +2,48 @@ class Stack:
     def __init__(self):
         self.stack = []
     
-    def append(self,variable):
+    def push(self,variable):
         self.stack.append(variable)
     
     def pop(self):
-        return self.stack.pop()
-    
-    def next_item(self):
-        return self.stack[-1]
-    
-    def is_empty(self):
+        if not self.isEmpty:
+            return self.stack.pop()
+        else:
+            return None
+            
+    def peek(self):
+        if not self.isEmpty:
+            return self.stack[-1]
+        else:
+            return None
+
+    def isEmpty(self):
         return self.stack == []
+
+    def size(self):
+        return len(self.stack)
 
 class Queue:
     def __init__(self):
         self.queue = []
     
-    def append(self,variable):
+    def enqueue(self,variable):
         self.queue.append(variable)
     
-    def pop(self):
-        return self.queue.pop(0)
+    def dequeue(self):
+        if not self.isEmpty:
+            return self.queue.pop(0)
+        else:
+            return None
     
-    def next_item(self):
-        return self.queue[0]
+    def front(self):
+        if not self.isEmpty:
+            return self.queue[0]
+        else:
+            return None
     
-    def is_empty(self):
+    def isEmpty(self):
         return self.queue == []
-
+    
+    def size(self):
+        return len(self.queue)
