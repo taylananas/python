@@ -61,8 +61,8 @@ def random_arrayizer(rows, columns):
     g.write(str(array))
     g.close()
 
-for i in range(30):
-    random_arrayizer(r.randint(20,400),r.randint(20,400))
+for i in range(5):
+    random_arrayizer(r.randint(20,40),r.randint(20,40))
     f = open("zorttiri")
     test_i = f.read()
     f.close()
