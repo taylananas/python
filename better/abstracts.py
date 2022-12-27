@@ -52,30 +52,22 @@ class Tree:
         self.right = None
 
     def insert(self, value):
-        if value == self.root:
-            return
+        if value == self.root: return
 
         elif value < self.root:
-            if self.left:
-                self.left.insert(value)
-            else:
-                self.left = Tree(value)
+            if self.left: self.left.insert(value)
+            else: self.left = Tree(value)
 
         elif value > self.root:
-            if self.right:
-                self.right.insert(value)
-            else:
-                self.right = Tree(value)
+            if self.right: self.right.insert(value)
+            else: self.right = Tree(value)
 
-        else:
-            self.root = value
+        else: self.root = value
 
     def search(self,value,depth=0):
-        if self.root == None:
-            return False
+        if self.root == None: return False
 
-        elif value == self.root:
-            return depth
+        elif value == self.root: return depth
 
         elif value < self.root:
             if self.left:
