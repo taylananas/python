@@ -1,0 +1,75 @@
+class Stack:
+    def __init__(self):
+        self.stack = []
+    
+    def append(self,variable):
+        self.stack.append(variable)
+    
+    def pop(self):
+        return self.stack.pop()
+    
+    def next_item(self):
+        return self.stack[-1]
+    
+    def is_empty(self):
+        return self.stack == []
+
+class Queue:
+    def __init__(self):
+        self.queue = []
+    
+    def append(self,variable):
+        self.queue.append(variable)
+    
+    def pop(self):
+        return self.queue.pop(0)
+    
+    def next_item(self):
+        return self.queue[0]
+    
+    def is_empty(self):
+        return self.queue == []
+
+class Tree:
+    def __init__(self):
+        self.tree = []
+    
+    def createNode(self,element):
+        return [element, [], []]
+
+    def datum(self):
+        return self.tree[0]
+
+    def left(self):
+        return self.tree[1]
+    
+    def right(self):
+        return self.tree[2]
+
+    def is_empty(self):
+        return self.tree == []
+
+    def binary_search(self,element):
+        if self.is_empty():
+            return False
+        
+        elif element == self.datum():
+            return True
+        
+        elif element < self.datum():
+            print("small")
+            print(self.left())
+            return self.binary_search(self.tree[1],element)
+
+a = Tree()
+
+a.tree.extend(a.createNode(5))
+
+print(a.tree)
+
+print(a.binary_search(3))
+
+# class BinaryTree(Tree):
+#     def insert(self,item):
+
+
