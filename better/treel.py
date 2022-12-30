@@ -40,11 +40,9 @@ def inorderTreversal(T):
     else:
         if not isEmpty(left(T)):
             tree += [inorderTreversal(left(T))]
-        tree += [datum(T)] 
-        
+        tree += [datum(T)]         
         if not isEmpty(right(T)):
             tree += [inorderTreversal(right(T))]
-    
 
     return tree
 

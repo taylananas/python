@@ -6,13 +6,13 @@ class Stack:
         self.stack.append(variable)
     
     def pop(self):
-        if not self.isEmpty:
-            return self.stack.pop()
-        else:
+        if self.isEmpty():
             return None
+        else:
+            return self.stack.pop()
             
     def peek(self):
-        if not self.isEmpty:
+        if not self.isEmpty():
             return self.stack[-1]
         else:
             return None
@@ -31,13 +31,16 @@ class Queue:
         self.queue.append(variable)
     
     def dequeue(self):
-        if not self.isEmpty:
+        if not self.isEmpty():
             return self.queue.pop(0)
         else:
             return None
-    
+
+    def size(self):
+        return len(self.queue)
+
     def front(self):
-        if not self.isEmpty:
+        if not self.isEmpty():
             return self.queue[0]
         else:
             return None
