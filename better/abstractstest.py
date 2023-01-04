@@ -67,7 +67,7 @@ def distance(lst, a, b):
     return (alllll)
     
 
-print(distance(roadlist,"B","L"))
+print(distance(roadlist,"A","L"))
 
 def flatten(lst):
     finallist=[]
