@@ -72,6 +72,3 @@ def function_validator(txt):
         func = "*"
     funcName = funcName.split("(")[0]
     return [funcName, func, splitFunc[0], splitFunc[1]]
-
-a = ["a(x)=x*30","b(x)=x+25","c(x)=x-50","d(x)=a(x)+60","e(x)=b(x)+c(x)","f(x)=5+x","g(x)=f(x)+d(x)"]
-print(construct_forest(a))
