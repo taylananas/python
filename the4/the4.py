@@ -1,40 +1,20 @@
-class Tree():
-    def create_tree():
-        return []
-
-    def name(T):
-        return T[0]
-
-    def left(T):
-        return T[2]
-
-    def right(T):
-        return T[3]
-    
-    def is_empty(T):
-        return T==[]
-
-    def create_node(T,funcName, func,element1=[], element2=[]):
-        T.extend([funcName, func, [element1], [element2]]) 
-
-
 def construct_forest(defs):
     forest = []
     for funct in defs:
-        branch = Tree.create_tree()
+        branch =  []
         functlist = function_validator(funct)
         checks = check_if_func(functlist)
         if checks == (0,0):
-            Tree.create_node(branch,functlist[0],functlist[1],functlist[2],functlist[3])
+            branch.extend([functlist[0],functlist[1],[functlist[2]],[functlist[3]]])
         elif checks == (1,1):
             k = function_validator(funct)
-            Tree.create_node(branch,k[0],k[1],k[2],k[3])
+            branch.extend([k[0],k[1],[k[2]],[k[3]]])
         elif checks[0] == 1:
             k = function_validator(funct)
-            Tree.create_node(branch,k[0],k[1],k[2],k[3])
+            branch.extend([k[0],k[1],[k[2]],[k[3]]])
         elif checks[1] == 1:
             k = function_validator(funct)
-            Tree.create_node(branch,k[0],k[1],k[2],k[3])
+            branch.extend([k[0],k[1],[k[2]],[k[3]]])
         forest.append(branch)
     tobedeleted = []
     for z in forest:
@@ -92,3 +72,6 @@ def function_validator(txt):
         func = "*"
     funcName = funcName.split("(")[0]
     return [funcName, func, splitFunc[0], splitFunc[1]]
+
+a = ["a(x)=x*30","b(x)=x+25","c(x)=x-50","d(x)=a(x)+60","e(x)=b(x)+c(x)","f(x)=5+x","g(x)=f(x)+d(x)"]
+print(construct_forest(a))
