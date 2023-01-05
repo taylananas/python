@@ -15,3 +15,8 @@ def pattern_search(p, i):
                 for row in rows: temp.append(row[y:y+patternColumn])
                 if temp == selectedDegree: return (x,y,zort*90)
     else: return False
+
+
+a = ["akc","cba"]
+b=["bc"]
+print(pattern_search(b,a))

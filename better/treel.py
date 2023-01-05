@@ -1,4 +1,3 @@
-import abstracts
 def create_Node(value):
     return [value,[],[]]
 
