@@ -107,3 +107,24 @@ def checkmul(tree):
     elif datum(left(tree)) * datum(right(tree)) == datum(tree):
         return True and checkmul(right(tree)) and checkmul(left(tree))
     else: return False
+
+def build(tree):
+    if isempty(tree):
+        return
+    elif datum(tree) == "string":
+        return datum(left(tree)) + datum(right(tree))
+    elif datum(tree) == "list":
+        if datum(left(tree)) != "list" and datum(right(tree)) != "list":
+            return [datum(left(tree)), datum(right(tree))]
+        else:
+            return [build(left(tree)), build(right(tree))]
+
+        # if datum(left(tree)) != "list" and datum(right(tree)) == "list":
+        #     return [datum(left(tree)), build(right(tree))]
+        # if datum(left(tree)) == "list" and datum(right(tree)) != "list":
+        #     return [build(left(tree)), datum(right(tree))]
+        # if datum(left(tree)) == "list" and datum(right(tree)) == "list":
+        #     return [build(left(tree)), build(right(tree))]
+print(build(['list', ['string', ['ali'], ['veli']], ['list', ['string', ['ali'], ['veli']], ['b']]]))
+print(build(['list', ['c'], ['eng']]))
+print(build(['string', ['c'], ['eng']]))
