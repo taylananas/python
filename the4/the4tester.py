@@ -11,3 +11,5 @@ for i,value in enumerate(cases):
 
     if answer != eval(answers[i]):
         print("wrong")
+    else:
+        print("true")

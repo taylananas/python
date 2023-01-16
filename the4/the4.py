@@ -3,16 +3,9 @@ def construct_forest(defs):
     for funct in defs:
         branch =  []
         functlist = function_validator(funct)
-        checks = check_if_func(functlist)
-        if checks == (0,0):
+        if check_if_func(funct) == 0:
             branch.extend([functlist[0],functlist[1],[functlist[2]],[functlist[3]]])
-        elif checks == (1,1):
-            k = function_validator(funct)
-            branch.extend([k[0],k[1],[k[2]],[k[3]]])
-        elif checks[0] == 1:
-            k = function_validator(funct)
-            branch.extend([k[0],k[1],[k[2]],[k[3]]])
-        elif checks[1] == 1:
+        else:
             k = function_validator(funct)
             branch.extend([k[0],k[1],[k[2]],[k[3]]])
         forest.append(branch)
@@ -43,17 +36,9 @@ def construct_forest(defs):
     return forest
 
 def check_if_func(txt):
-    checklist = []
     for zort in txt[2:4]:
-        if "(" in zort:
-            checklist.append(1)
-        else:
-            checklist.append(0)
-
-    if checklist[0] == 0 and checklist[1] == 0: return 0,0
-    elif checklist[0] == 1 and checklist[1] == 0:   return 1,0
-    elif checklist[0] == 0 and checklist[1] == 1:   return 0,1
-    elif checklist[0] == 1 and checklist[1] == 1:   return 1,1
+        if "(" in zort: return 0
+        else: return 1
 
 def function_validator(txt):
     txt = txt.replace(" ", "")

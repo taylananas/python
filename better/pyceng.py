@@ -107,3 +107,13 @@ def checkmul(tree):
     elif datum(left(tree)) * datum(right(tree)) == datum(tree):
         return True and checkmul(right(tree)) and checkmul(left(tree))
     else: return False
+
+def path_exists(tree,txt,lenght=0):
+    if lenght == len(txt):
+        return True
+    if isempty(tree):
+        return False
+    elif datum(tree) in txt:
+        return True and (path_exists(left(tree),txt,lenght+1) or path_exists(right(tree),txt,lenght+1))
+    else:
+        return path_exists(left(tree),txt) or path_exists(right(tree),txt)
