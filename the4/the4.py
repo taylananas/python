@@ -2,12 +2,8 @@ def construct_forest(defs):
     forest = []
     for funct in defs:
         branch =  []
-        functlist = function_validator(funct)
-        if check_if_func(funct) == 0:
-            branch.extend([functlist[0],functlist[1],[functlist[2]],[functlist[3]]])
-        else:
-            k = function_validator(funct)
-            branch.extend([k[0],k[1],[k[2]],[k[3]]])
+        k = function_validator(funct)
+        branch.extend([k[0],k[1],[k[2]],[k[3]]])
         forest.append(branch)
     tobedeleted = []
     for z in forest:
@@ -34,11 +30,6 @@ def construct_forest(defs):
         if m[0] in tobedeleted:
             forest.remove(m)
     return forest
-
-def check_if_func(txt):
-    for zort in txt[2:4]:
-        if "(" in zort: return 0
-        else: return 1
 
 def function_validator(txt):
     txt = txt.replace(" ", "")
