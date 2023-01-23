@@ -12,7 +12,7 @@ def construct_forest(defs):
                 if k[0] in z[2][0]:
                     z[2] = k
                     tobedeleted.append(k[0])
-        elif "(" in z[3][0] and not "(" in z[2][0]:
+        elif "(" in z[3][0] and not "(" in z[2][0]: #no 
             for k in forest:
                 if k[0] in z[3][0]:
                     z[3] = k
@@ -48,3 +48,5 @@ def function_validator(txt):
         func = "*"
     funcName = funcName.split("(")[0]
     return [funcName, func, splitFunc[0], splitFunc[1]]
+
+print (construct_forest(["g(x)=x-2", "h(x)=3^x", "c(x)=x-4", "f(x)=g(x)*h(x)", "a(x)=f(x)-g(x)"]))
